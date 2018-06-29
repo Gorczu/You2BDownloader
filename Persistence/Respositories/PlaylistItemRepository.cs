@@ -27,8 +27,8 @@ namespace Persistence.Respositories
         public bool EditItem(int idx, PlaylistItem newValue)
         {
             int result = _sqlConnection.Execute(" UPDATE PlaylistItem " +
-                                                $"SET Address={newValue.Address} " +
-                                                $"SET Description={newValue.Description} " +
+                                                $"SET Address={newValue.Address}, " +
+                                                $"SET Description={newValue.Description}, " +
                                                 $"SET NewName={newValue.NewName} " +
                                                 $"WHERE Id={newValue.Id} ");
             return result != 0; 
