@@ -4,6 +4,7 @@ using Prism.Regions;
 using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
+using PlaylistModule.BusinessLogic;
 
 namespace PlaylistModule
 {
@@ -20,6 +21,7 @@ namespace PlaylistModule
 
         public void Initialize()
         {
+            _container.RegisterType<IPlaylistCollector, PlaylistCollector>();
             _container.RegisterTypeForNavigation<Playlist>();
         }
     }
