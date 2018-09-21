@@ -8,9 +8,46 @@
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
+    <UserControl.Resources>
+        <Style TargetType="TextBox" >
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Button" >
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="{Binding Message}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="SearchTxt" Text="{Binding SearchText}" />
+            <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <local:MovieControll />
+        </StackPanel>
+        <!--
+        <ListBox Grid.Row="1" ItemsSource="{Binding Result}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <local:MovieControll/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        -->
     </Grid>
 </UserControl>

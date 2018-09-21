@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace PlaylistModule.BusinessLogic
 {
-    public class YouTubeItem
+    public enum YoutubeItemType
     {
-        public string Address { get; set; }
-
+        NORMAL,
+        PLAYLIST,
+        CHANEL
     }
 }

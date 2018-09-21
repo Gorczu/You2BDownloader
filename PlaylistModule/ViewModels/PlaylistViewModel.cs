@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace PlaylistModule.ViewModels
 {
-    public class PlaylistViewModel : BindableBase
+    public class PlaylistViewModel : BindableBase, IPlaylistViewModel
     {
         public PlaylistViewModel(IPlaylistCollector searchCommand)
         {
             this.SearchCommand = searchCommand;
         }
 
-        private string _message;
+        private string _searchText;
 
         private IPlaylistCollector _searchCommand;
 
-        public string Message
+        public string SearchText
         {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
+            get { return _searchText; }
+            set { SetProperty(ref _searchText, value); }
         }
 
         public IPlaylistCollector SearchCommand
@@ -32,9 +32,14 @@ namespace PlaylistModule.ViewModels
             set => _searchCommand = value;
         }
 
-        public PlaylistViewModel()
+        private IList<YoutubeItem> _result;
+        public IList<YoutubeItem> Result
         {
-            Message = "Playlist Prism Module";
+            get => _result;
+            set
+            {
+                SetProperty(ref _result, value);
+            }
         }
     }
 }

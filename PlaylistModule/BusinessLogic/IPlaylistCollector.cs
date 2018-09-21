@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlaylistModule.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace PlaylistModule.BusinessLogic
 {
     public interface IPlaylistCollector : ICommand
     {
-        IList<YouTubeItem> GetCollection(string pattern);
+        IList<YoutubeItem> GetCollection(string pattern);
     }
 }

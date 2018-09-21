@@ -5,6 +5,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 using PlaylistModule.BusinessLogic;
+using PlaylistModule.ViewModels;
 
 namespace PlaylistModule
 {
