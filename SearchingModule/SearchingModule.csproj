@@ -87,8 +87,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\IPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\PlaylistViewModel.cs" />
+    <Compile Include="ViewModels\ISearchingViewModel.cs" />
+    <Compile Include="ViewModels\SearchingViewModel.cs" />
     <Compile Include="ViewModels\YoutubeItem.cs" />
     <Compile Include="Views\MovieControll.xaml.cs">
       <DependentUpon>MovieControll.xaml</DependentUpon>

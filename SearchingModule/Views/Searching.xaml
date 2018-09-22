@@ -33,22 +33,6 @@
         <StackPanel Grid.Row="1">
             
         </StackPanel>
-        <!--
-        <local:MovieControll />
-        <ListBox Grid.Row="1" ItemsSource="{Binding Result}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <local:MovieControll/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        -->
+      
     </Grid>
 </UserControl>

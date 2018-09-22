@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchingModule.ViewModels
 {
-    public interface IPlaylistViewModel
+    public interface ISearchingViewModel
     {
         IList<YoutubeItem> Result { get; set; }
     }

@@ -23,13 +23,13 @@
                     <Setter Property="Margin"  Value="1"/>
                 </Style>
             </StackPanel.Resources>
-            <RadioButton   Command="{Binding Path=ChangeSite}" CommandParameter="Search" IsChecked="True">
+            <RadioButton   Command="{Binding Path=ChangeSite}" CommandParameter="Searching">
                 <StackPanel>
                     <Image Source="/YouToubeDownloader;component/icons/if_youtube_294703.ico"  />
                     <Label Content="{x:Static prop:Resources.Search}"/>
                 </StackPanel>
             </RadioButton>
-            <RadioButton  Command="{Binding Path=ChangeSite}" CommandParameter="Playlist">
+            <RadioButton  Command="{Binding Path=ChangeSite}" CommandParameter="UserPlaylist" IsChecked="True">
                 <StackPanel>
                     <Image Source="/YouToubeDownloader;component/icons/if_list_1785197.ico"  />
                     <Label  Content="{x:Static prop:Resources.List}"/>

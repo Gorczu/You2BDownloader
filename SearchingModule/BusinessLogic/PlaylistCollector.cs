@@ -26,7 +26,7 @@ namespace SearchingModule.BusinessLogic
 
         public void Execute(object parameter)
         {
-            var vm = (PlaylistViewModel)parameter;
+            var vm = (SearchingViewModel)parameter;
             this._pattern = vm.SearchText;
             Run();
             vm.Result = videos;

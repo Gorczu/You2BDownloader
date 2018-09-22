@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UserPlaylistModule.ViewModels
 {
-    public class SearchViewModel : BindableBase
+    public class UserPlaylistViewModel : BindableBase
     {
         private string _message;
         public string Message
@@ -17,7 +17,7 @@ namespace UserPlaylistModule.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public SearchViewModel()
+        public UserPlaylistViewModel()
         {
             Message = "User Playlist Module";
         }

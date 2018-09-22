@@ -21,7 +21,7 @@ namespace UserPlaylistModule
         public void Initialize()
         {
             _container.RegisterTypeForNavigation<UserPlaylist>();
-            _regionManager.RequestNavigate("ContentRegion", "Search");
+            _regionManager.RequestNavigate("ContentRegion", "UserPlaylist");
         }
     }
 }

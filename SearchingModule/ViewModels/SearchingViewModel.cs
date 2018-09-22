@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SearchingModule.ViewModels
 {
-    public class PlaylistViewModel : BindableBase, IPlaylistViewModel
+    public class SearchingViewModel : BindableBase, ISearchingViewModel
     {
-        public PlaylistViewModel(IPlaylistCollector searchCommand)
+        public SearchingViewModel(IPlaylistCollector searchCommand)
         {
             this.SearchCommand = searchCommand;
         }
