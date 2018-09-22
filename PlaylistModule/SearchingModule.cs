@@ -9,12 +9,12 @@ using PlaylistModule.ViewModels;
 
 namespace PlaylistModule
 {
-    public class PlaylistModule : IModule
+    public class SearchingModule : IModule
     {
         private IRegionManager _regionManager;
         private IUnityContainer _container;
 
-        public PlaylistModule(IUnityContainer container, IRegionManager regionManager)
+        public SearchingModule(IUnityContainer container, IRegionManager regionManager)
         {
             _container = container;
             _regionManager = regionManager;

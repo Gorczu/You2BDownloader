@@ -155,9 +155,9 @@
       <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PlaylistModule\PlaylistModule.csproj">
+    <ProjectReference Include="..\PlaylistModule\SearchingModule.csproj">
       <Project>{26d15158-06c5-4c90-bd5f-5615f2c09ce0}</Project>
-      <Name>PlaylistModule</Name>
+      <Name>SearchingModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\SearchModule\SearchModule.csproj">
       <Project>{9e09b463-54fc-4928-ac45-7b5774c9f719}</Project>

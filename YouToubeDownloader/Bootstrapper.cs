@@ -27,7 +27,7 @@ namespace YouToubeDownloader
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(SearchModule.SearchModule));
-            moduleCatalog.AddModule(typeof(PlaylistModule.PlaylistModule));
+            moduleCatalog.AddModule(typeof(PlaylistModule.SearchingModule));
             moduleCatalog.AddModule(typeof(DownloadModule.DownloadModule));
 
             //---TEST FOR CONNECTION

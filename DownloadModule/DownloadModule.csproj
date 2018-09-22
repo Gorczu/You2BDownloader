@@ -67,6 +67,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\Downloader.cs" />
+    <Compile Include="BusinessLogic\IDownloader.cs" />
     <Compile Include="DownloadModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchModule", "SearchModul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloadModule", "DownloadModule\DownloadModule.csproj", "{E35E8C88-2094-40B7-B7EA-10277D400A13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaylistModule", "PlaylistModule\PlaylistModule.csproj", "{26D15158-06C5-4C90-BD5F-5615F2C09CE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchingModule", "PlaylistModule\SearchingModule.csproj", "{26D15158-06C5-4C90-BD5F-5615F2C09CE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{AAB5D1FB-14EA-4EB7-A729-E6C5589C45FF}"
 EndProject

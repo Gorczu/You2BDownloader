@@ -31,9 +31,10 @@
             <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <local:MovieControll />
+            
         </StackPanel>
         <!--
+        <local:MovieControll />
         <ListBox Grid.Row="1" ItemsSource="{Binding Result}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
