@@ -1,13 +1,13 @@
 ﻿using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
-using PlaylistModule.ViewModels;
+using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlaylistModule.BusinessLogic
+namespace SearchingModule.BusinessLogic
 {
     public class PlaylistCollector : IPlaylistCollector
     {

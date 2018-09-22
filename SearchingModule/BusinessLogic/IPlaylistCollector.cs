@@ -1,4 +1,4 @@
-﻿using PlaylistModule.ViewModels;
+﻿using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PlaylistModule.BusinessLogic
+namespace SearchingModule.BusinessLogic
 {
     public interface IPlaylistCollector : ICommand
     {

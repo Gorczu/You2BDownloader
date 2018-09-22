@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SearchModule.ViewModels
+namespace UserPlaylistModule.ViewModels
 {
     public class SearchViewModel : BindableBase
     {
@@ -19,7 +19,7 @@ namespace SearchModule.ViewModels
 
         public SearchViewModel()
         {
-            Message = "Search Prism Module";
+            Message = "User Playlist Module";
         }
     }
 }

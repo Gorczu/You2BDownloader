@@ -3,11 +3,11 @@ using System.Windows;
 using Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
-using SearchModule;
-using PlaylistModule;
 using DownloadModule;
 using Prism.Regions;
 using Persistence;
+using UserPlaylistModule;
+using SearchingModule;
 
 namespace YouToubeDownloader
 {
@@ -26,8 +26,8 @@ namespace YouToubeDownloader
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            moduleCatalog.AddModule(typeof(SearchModule.SearchModule));
-            moduleCatalog.AddModule(typeof(PlaylistModule.SearchingModule));
+            moduleCatalog.AddModule(typeof(SearchingModule.SearchingModule));
+            moduleCatalog.AddModule(typeof(UserPlaylistModule.UserPlaylistModule));
             moduleCatalog.AddModule(typeof(DownloadModule.DownloadModule));
 
             //---TEST FOR CONNECTION

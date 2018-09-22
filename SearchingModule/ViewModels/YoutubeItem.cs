@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlaylistModule.ViewModels
+namespace SearchingModule.ViewModels
 {
     public class YoutubeItem
     {

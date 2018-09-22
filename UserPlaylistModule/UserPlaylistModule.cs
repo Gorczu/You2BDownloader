@@ -1,18 +1,18 @@
-﻿using SearchModule.Views;
+﻿using UserPlaylistModule.Views;
 using Prism.Modularity;
 using Prism.Regions;
 using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 
-namespace SearchModule
+namespace UserPlaylistModule
 {
-    public class SearchModule : IModule
+    public class UserPlaylistModule : IModule
     {
         private IRegionManager _regionManager;
         private IUnityContainer _container;
 
-        public SearchModule(IUnityContainer container, IRegionManager regionManager)
+        public UserPlaylistModule(IUnityContainer container, IRegionManager regionManager)
         {
             _container = container;
             _regionManager = regionManager;
@@ -20,7 +20,7 @@ namespace SearchModule
 
         public void Initialize()
         {
-            _container.RegisterTypeForNavigation<Search>();
+            _container.RegisterTypeForNavigation<UserPlaylist>();
             _regionManager.RequestNavigate("ContentRegion", "Search");
         }
     }

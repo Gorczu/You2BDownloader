@@ -155,9 +155,13 @@
       <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SearchModule\SearchModule.csproj">
-      <Project>{9e09b463-54fc-4928-ac45-7b5774c9f719}</Project>
-      <Name>SearchModule</Name>
+    <ProjectReference Include="..\SearchingModule\SearchingModule.csproj">
+      <Project>{26D15158-06C5-4C90-BD5F-5615F2C09CE0}</Project>
+      <Name>SearchingModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserPlaylistModule\UserPlaylistModule.csproj">
+      <Project>{9E09B463-54FC-4928-AC45-7B5774C9F719}</Project>
+      <Name>UserPlaylistModule</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

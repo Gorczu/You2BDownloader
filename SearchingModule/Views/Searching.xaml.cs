@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PlaylistModule.Views
+namespace SearchingModule.Views
 {
     /// <summary>
     /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class Playlist : UserControl
+    public partial class Searching : UserControl
     {
-        public Playlist()
+        public Searching()
         {
             InitializeComponent();
         }
