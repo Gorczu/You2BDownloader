@@ -11,6 +11,7 @@ namespace Persistence.Models
         public int Id { get; set; }
         public string Address { get; set; }
         public string NewName { get; set; }
+        public byte[] Data { get; set; }
         public string Description { get; set; }
     }
 }

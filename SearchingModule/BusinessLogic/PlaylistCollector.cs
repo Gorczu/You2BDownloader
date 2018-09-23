@@ -16,7 +16,7 @@ namespace SearchingModule.BusinessLogic
         public bool CanExecute(object parameter) => true;
 
         List<YoutubeItem>  _result = new List<YoutubeItem>();
-        private List<YoutubeItem> videos;
+        private List<YoutubeItem> results;
         private List<YoutubeItem> channels;
         private List<YoutubeItem> playlists;
 
@@ -29,7 +29,7 @@ namespace SearchingModule.BusinessLogic
             var vm = (SearchingViewModel)parameter;
             this._pattern = vm.SearchText;
             Run();
-            vm.Result = videos;
+            vm.Result = results;
         }
 
 
@@ -37,8 +37,6 @@ namespace SearchingModule.BusinessLogic
         {
             this._pattern = pattern;
             Run();
-            
-            
             return _result;
         }
 
@@ -57,10 +55,7 @@ namespace SearchingModule.BusinessLogic
             // Call the search.list method to retrieve results matching the specified query term.
             var searchListResponse = searchListRequest.Execute();
 
-            this.videos = new List<YoutubeItem>();
-            this.channels = new List<YoutubeItem>();
-            this.playlists = new List<YoutubeItem>();
-
+            this.results = new List<YoutubeItem>();
             string baseURI = @"https://www.youtube.com/watch?v={0}";
 
             // Add each result to the appropriate list, and then display the lists of
@@ -70,7 +65,7 @@ namespace SearchingModule.BusinessLogic
                 switch (searchResult.Id.Kind)
                 {
                     case "youtube#video":
-                        videos.Add(new YoutubeItem()
+                        results.Add(new YoutubeMovie()
                         {
                             Name = searchResult.Snippet.Title,
                             Source = string.Format(baseURI, searchResult.Id)
@@ -78,7 +73,12 @@ namespace SearchingModule.BusinessLogic
                         break;
 
                     case "youtube#channel":
-                        channels.Add(new YoutubeItem()
+
+
+
+
+
+                        results.Add(new YoutubeChanel()
                         {
                             Name = searchResult.Snippet.Title,
                             Source = string.Format(baseURI, searchResult.Id)
@@ -86,7 +86,7 @@ namespace SearchingModule.BusinessLogic
                         break;
 
                     case "youtube#playlist":
-                        playlists.Add(new YoutubeItem()
+                        playlists.Add(new YoutubePlaylist()
                         {
                             Name = searchResult.Snippet.Title,
                             Source = string.Format(baseURI, searchResult.Id)
@@ -94,8 +94,6 @@ namespace SearchingModule.BusinessLogic
                         break;
                 }
             }
-
-            
         }        
     }
 }

@@ -20,23 +20,24 @@ namespace Persistence.Respositories
 
         public bool DeleteItem(int idx)
         {
-            int result = _sqlConnection.Execute($"DELETE FROM PlaylistItem WHERE Id={idx}");
+            int result = _sqlConnection.Execute($"DELETE FROM PlayListItem WHERE Id={idx}");
             return result != 0;
         }
 
         public bool EditItem(int idx, PlaylistItem newValue)
         {
-            int result = _sqlConnection.Execute(" UPDATE PlaylistItem " +
+            int result = _sqlConnection.Execute(" UPDATE PlayListItem " +
                                                 $"SET Address={newValue.Address}, " +
                                                 $"SET Description={newValue.Description}, " +
                                                 $"SET NewName={newValue.NewName} " +
+                                                $"SET Data={newValue.Data} " +
                                                 $"WHERE Id={newValue.Id} ");
             return result != 0; 
         }
 
         public PlaylistItem GetItem(int idx)
         {
-            var result = _sqlConnection.Query<PlaylistItem>("SELECT * FROM PlaylistItem " +
+            var result = _sqlConnection.Query<PlaylistItem>("SELECT * FROM PlayListItem " +
                                                            $"WHERE Id={idx}");
 
             return result.FirstOrDefault() ?? null;
@@ -44,7 +45,7 @@ namespace Persistence.Respositories
 
         public IList<PlaylistItem> GetItems(int pageNo, int noPerPage, string orderParameterName)
         {
-            var result = _sqlConnection.Query<PlaylistItem>("SELECT * FROM PlaylistItem " +
+            var result = _sqlConnection.Query<PlaylistItem>("SELECT * FROM PlayListItem " +
                                                            $"ORDER BY {orderParameterName} " +
                                                            $"LIMIT {noPerPage}, {pageNo * noPerPage}");
 
@@ -53,8 +54,8 @@ namespace Persistence.Respositories
 
         public bool InsertItem(PlaylistItem item)
         {
-            int result = _sqlConnection.Execute($"INSERT INTO PlaylistItem(Address, Description, NewName) " +
-                                                $"VALUE ({item.Address}, {item.Description}, {item.NewName})");
+            int result = _sqlConnection.Execute($"INSERT INTO PlayListItem(Address, Description, NewName, Data) " +
+                                                $"VALUE ({item.Address}, {item.Description}, {item.NewName}, {item.Data})");
             return result != 0;
         }
     }

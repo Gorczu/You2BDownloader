@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SearchingModule.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:SearchingModule.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
@@ -19,6 +20,8 @@
             <Setter Property="Width" Value="80"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
+        
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,7 +34,16 @@
             <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            
+            <ListView ItemsSource="{Binding Result}">
+                <ListView.Resources>
+                    <DataTemplate  DataType="{x:Type vm:YoutubeMovie}" >
+                        <local:MovieControll/>
+                    </DataTemplate>
+                    <DataTemplate  DataType="{x:Type vm:YoutubeChanel}" >
+                        <local:PlaylistControl/>
+                    </DataTemplate>
+                </ListView.Resources>
+            </ListView>
         </StackPanel>
       
     </Grid>

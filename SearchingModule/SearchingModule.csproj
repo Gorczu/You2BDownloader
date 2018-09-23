@@ -7,7 +7,7 @@
     <ProjectGuid>{26D15158-06C5-4C90-BD5F-5615F2C09CE0}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlaylistModule</RootNamespace>
+    <RootNamespace>SearchingModule</RootNamespace>
     <AssemblyName>SearchingModule</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -87,11 +87,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\IContainerForYTubeItems.cs" />
     <Compile Include="ViewModels\ISearchingViewModel.cs" />
     <Compile Include="ViewModels\SearchingViewModel.cs" />
+    <Compile Include="ViewModels\YoutubeChanel.cs" />
     <Compile Include="ViewModels\YoutubeItem.cs" />
+    <Compile Include="ViewModels\YoutubeMovie.cs" />
+    <Compile Include="ViewModels\YoutubePlaylist.cs" />
     <Compile Include="Views\MovieControll.xaml.cs">
       <DependentUpon>MovieControll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaylistControl.xaml.cs">
+      <DependentUpon>PlaylistControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Searching.xaml.cs">
       <DependentUpon>Searching.xaml</DependentUpon>
@@ -114,6 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\MovieControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaylistControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

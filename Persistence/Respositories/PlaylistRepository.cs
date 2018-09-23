@@ -5,19 +5,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data;
 
 namespace Persistence.Respositories
 {
     public class PlaylistRepository : IRepository<PlayList>
     {
+        private IDbConnection _sqlConnection;
+
+        public PlaylistRepository(IDbConnection sqlConnection)
+        {
+            _sqlConnection = sqlConnection;
+        }
+
         public bool DeleteItem(int idx)
         {
-            throw new NotImplementedException();
+            int result = _sqlConnection.Execute($"DELETE FROM PlayList WHERE Id={idx}");
+            return result != 0;
         }
 
         public bool EditItem(int idx, PlayList newValue)
         {
-            throw new NotImplementedException();
+            int result = _sqlConnection.Execute(" UPDATE PlayList " +
+                                                $"SET FolderPath={newValue.FolderPath}, " +
+                                                $"SET Description={newValue.Description}, " +
+                                                $"SET Gerne={newValue.Gerne} " +
+                                                $"SET StartGeneration={newValue.StartGeneration} " +
+                                                $"WHERE Id={newValue.Id} ");
+            return result != 0;
         }
 
         public PlayList GetItem(int idx)
