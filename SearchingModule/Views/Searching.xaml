@@ -20,21 +20,18 @@
             <Setter Property="Width" Value="80"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
-        
-
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBox x:Name="SearchTxt" Text="{Binding SearchText}" />
-            <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}"/>
+            <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}" IsDefault="True"/>
         </StackPanel>
-        <StackPanel Grid.Row="1">
-            <ListView ItemsSource="{Binding Result}">
+        <Grid Grid.Row="1" x:Name="childGrid" Margin="5" >
+            <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Result}" Height="{Binding ElementName=childGrid, Path=Height}">
                 <ListView.Resources>
                     <DataTemplate  DataType="{x:Type vm:YoutubeMovie}" >
                         <local:MovieControll/>
@@ -42,9 +39,16 @@
                     <DataTemplate  DataType="{x:Type vm:YoutubeChanel}" >
                         <local:PlaylistControl/>
                     </DataTemplate>
+                    <DataTemplate  DataType="{x:Type vm:YoutubePlaylist}" >
+                        <local:PlaylistControl/>
+                    </DataTemplate>
                 </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
             </ListView>
-        </StackPanel>
-      
+        </Grid>
     </Grid>
 </UserControl>

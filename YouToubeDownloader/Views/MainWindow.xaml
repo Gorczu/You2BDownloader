@@ -4,7 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:prop="clr-namespace:YouToubeDownloader.Properties"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="550" Width="860">
+        Title="{Binding Title}" Height="550" Width="860" x:Name="window">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="85"/>
@@ -42,8 +42,8 @@
                 </StackPanel>
             </RadioButton>
         </StackPanel>
-        <StackPanel Grid.Row="1">
+        <Grid Grid.Row="1" Margin="5">
             <ContentControl prism:RegionManager.RegionName="ContentRegion" />
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

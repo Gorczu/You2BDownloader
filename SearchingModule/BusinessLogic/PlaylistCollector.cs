@@ -15,7 +15,7 @@ namespace SearchingModule.BusinessLogic
         public event EventHandler CanExecuteChanged;
         public bool CanExecute(object parameter) => true;
 
-        List<YoutubeItem>  _result = new List<YoutubeItem>();
+        List<YoutubeItem> _result = new List<YoutubeItem>();
         private List<YoutubeItem> results;
         private List<YoutubeItem> channels;
         private List<YoutubeItem> playlists;
@@ -68,32 +68,32 @@ namespace SearchingModule.BusinessLogic
                         results.Add(new YoutubeMovie()
                         {
                             Name = searchResult.Snippet.Title,
+                            ImgSrc = searchResult.Snippet.Thumbnails.Default__.Url,
                             Source = string.Format(baseURI, searchResult.Id)
                         });
                         break;
 
                     case "youtube#channel":
-
-
-
-
-
+                        
                         results.Add(new YoutubeChanel()
                         {
-                            Name = searchResult.Snippet.Title,
-                            Source = string.Format(baseURI, searchResult.Id)
+                            Name = searchResult.Snippet.ChannelTitle,
+                            ImgSrc = searchResult.Snippet.Thumbnails.Default__.Url,
+                            Source = string.Format(baseURI, searchResult.Snippet.ChannelId)
                         });
                         break;
 
                     case "youtube#playlist":
-                        playlists.Add(new YoutubePlaylist()
+
+                        results.Add(new YoutubePlaylist()
                         {
-                            Name = searchResult.Snippet.Title,
-                            Source = string.Format(baseURI, searchResult.Id)
+                            Name = searchResult.Snippet.ChannelTitle,
+                            ImgSrc = searchResult.Snippet.Thumbnails.Default__.Url,
+                            Source = string.Format(baseURI, searchResult.Snippet.Title)
                         });
                         break;
                 }
             }
-        }        
+        }
     }
 }
