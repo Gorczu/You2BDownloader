@@ -9,8 +9,35 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
-        <TextBlock Text="{Binding Message}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Height" Value="25"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Height" Value="25"/>
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel >
+            <Label Content="Name"/>
+            <Label Content="Gerne"/>
+            <Label Content="Created"/>
+            <Label Content="Desription"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+            <TextBox Text="{Binding Name}"/>
+            <TextBox Text="{Binding Gerne}"/>
+            <TextBox Text="{Binding Created}" IsEnabled="False" />
+            <TextBox Text="{Binding Description}"  Height="56"/>
+        </StackPanel>
     </Grid>
+
 </UserControl>
