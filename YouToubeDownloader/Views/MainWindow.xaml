@@ -4,7 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:prop="clr-namespace:YouToubeDownloader.Properties"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="550" Width="860" x:Name="window">
+        Title="{Binding Title}" Height="550" Width="560" x:Name="window">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="85"/>

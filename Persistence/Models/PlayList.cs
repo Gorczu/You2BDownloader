@@ -9,6 +9,7 @@ namespace Persistence.Models
     public class PlayList
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public IList<PlaylistItem> Items { get; set; }
         public string FolderPath { get; set; }
         public string Description { get; set; }

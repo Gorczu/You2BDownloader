@@ -29,6 +29,7 @@ namespace Persistence.Respositories
             int result = _sqlConnection.Execute(" UPDATE PlayList " +
                                                 $"SET FolderPath={newValue.FolderPath}, " +
                                                 $"SET Description={newValue.Description}, " +
+                                                $"SET Name={newValue.Name}, " +
                                                 $"SET Gerne={newValue.Gerne} " +
                                                 $"SET StartGeneration={newValue.StartGeneration} " +
                                                 $"WHERE Id={newValue.Id} ");
@@ -37,17 +38,27 @@ namespace Persistence.Respositories
 
         public PlayList GetItem(int idx)
         {
-            throw new NotImplementedException();
+            var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
+                                                       $"WHERE Id={idx}");
+
+            return result.FirstOrDefault() ?? null;
         }
 
         public IList<PlayList> GetItems(int pageNo, int noPerPage, string orderParameterName)
         {
-            throw new NotImplementedException();
+            var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
+                                                       $"ORDER BY {orderParameterName} " +
+                                                       $"LIMIT {noPerPage}, {pageNo * noPerPage}");
+
+            return result.ToArray();
         }
 
         public bool InsertItem(PlayList item)
         {
-            throw new NotImplementedException();
+            int result = _sqlConnection.Execute($"INSERT INTO PlayList(Description, FolderPath, Gerne, Name) " +
+                                                $"VALUE ({item.Description}, {item.FolderPath}, {item.Gerne}, " +
+                                                $"{item.Name} )");
+            return result != 0;
         }
     }
 }

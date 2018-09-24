@@ -1,25 +1,26 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using SearchModule.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace UserPlaylistModule.ViewModels
 {
-    public class UserPlaylistViewModel : BindableBase
+    public class UserPlaylistViewModel : BindableBase, IUserPlaylistViewModel
     {
-        private string _message;
-        public string Message
+        private ListItemViewModel _currenItem;
+        private ObservableCollection<ListItemViewModel> _playlistCollection;
+
+        public ListItemViewModel CurrenItem { get => _currenItem; set => SetProperty(ref _currenItem , value); }
+        public ObservableCollection<ListItemViewModel> PlaylistCollection
         {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
+            get => _playlistCollection;
+            set => SetProperty(ref _playlistCollection ,value);
         }
 
-        public UserPlaylistViewModel()
-        {
-            Message = "User Playlist Module";
-        }
     }
 }

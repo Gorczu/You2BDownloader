@@ -54,8 +54,10 @@ namespace Persistence.Respositories
 
         public bool InsertItem(PlaylistItem item)
         {
-            int result = _sqlConnection.Execute($"INSERT INTO PlayListItem(Address, Description, NewName, Data) " +
-                                                $"VALUE ({item.Address}, {item.Description}, {item.NewName}, {item.Data})");
+            int result = _sqlConnection.Execute($"INSERT INTO PlayListItem(Address, Description, NewName, Data, " +
+                                                $"PlayListId) " +
+                                                $"VALUE ({item.Address}, {item.Description}, {item.NewName}, " +
+                                                $"{item.Data}, {item.PlayListId})");
             return result != 0;
         }
     }
