@@ -147,6 +147,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonControls\CommonControls.csproj">
+      <Project>{dd9b7510-18f8-4e87-8392-e03d69abd3cf}</Project>
+      <Name>CommonControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DownloadModule\DownloadModule.csproj">
       <Project>{e35e8c88-2094-40b7-b7ea-10277d400a13}</Project>
       <Name>DownloadModule</Name>

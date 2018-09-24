@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchingModule", "Searchin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserPlaylistModule", "UserPlaylistModule\UserPlaylistModule.csproj", "{9E09B463-54FC-4928-AC45-7B5774C9F719}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonControls", "CommonControls\CommonControls.csproj", "{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,14 @@ Global
 		{9E09B463-54FC-4928-AC45-7B5774C9F719}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E09B463-54FC-4928-AC45-7B5774C9F719}.Release|x86.ActiveCfg = Release|x86
 		{9E09B463-54FC-4928-AC45-7B5774C9F719}.Release|x86.Build.0 = Release|x86
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Debug|x86.Build.0 = Debug|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

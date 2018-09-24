@@ -5,8 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:SearchingModule.ViewModels"
+             xmlns:common="clr-namespace:CommonControls.Views;assembly=CommonControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300" d:DesignWidth="500"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <UserControl.Resources>
@@ -24,13 +25,28 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBox x:Name="SearchTxt" Text="{Binding SearchText}" />
             <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}" IsDefault="True"/>
         </StackPanel>
-        <Grid Grid.Row="1" x:Name="childGrid" Margin="5" >
+        <StackPanel Grid.Row="1">
+            <ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <common:UserListView/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </StackPanel>
+        <Grid Grid.Row="2" x:Name="childGrid" Margin="5" >
             <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Result}" Height="{Binding ElementName=childGrid, Path=Height}">
                 <ListView.Resources>
                     <DataTemplate  DataType="{x:Type vm:YoutubeMovie}" >

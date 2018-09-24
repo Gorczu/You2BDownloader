@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommonControls.VM;
 
 namespace SearchingModule.ViewModels
 {
@@ -17,7 +18,6 @@ namespace SearchingModule.ViewModels
         }
 
         private string _searchText;
-
         private IPlaylistCollector _searchCommand;
 
         public string SearchText
@@ -41,5 +41,13 @@ namespace SearchingModule.ViewModels
                 SetProperty(ref _result, value);
             }
         }
+
+        private List<UserPlaylistVM> _userPlaylist;
+        public List<UserPlaylistVM> UserPlaylist
+        {
+            get => _userPlaylist;
+            set => SetProperty(ref _userPlaylist , value);
+        }
+
     }
 }

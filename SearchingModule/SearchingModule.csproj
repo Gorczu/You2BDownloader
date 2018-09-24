@@ -114,6 +114,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonControls\CommonControls.csproj">
+      <Project>{dd9b7510-18f8-4e87-8392-e03d69abd3cf}</Project>
+      <Name>CommonControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
       <Name>Persistence</Name>

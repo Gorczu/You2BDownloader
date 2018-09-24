@@ -29,6 +29,7 @@ namespace YouToubeDownloader
             moduleCatalog.AddModule(typeof(SearchingModule.SearchingModule));
             moduleCatalog.AddModule(typeof(UserPlaylistModule.UserPlaylistModule));
             moduleCatalog.AddModule(typeof(DownloadModule.DownloadModule));
+            moduleCatalog.AddModule(typeof(CommonControls.CommonControlsModule));
 
             //---TEST FOR CONNECTION
             //var a = SqlConnector.GetDefaultConnection();
