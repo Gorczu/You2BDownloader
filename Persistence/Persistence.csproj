@@ -105,6 +105,9 @@
     <PackageReference Include="Dapper">
       <Version>1.50.5</Version>
     </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="6.3.0" />
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.108</Version>

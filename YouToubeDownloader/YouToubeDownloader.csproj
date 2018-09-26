@@ -141,6 +141,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="6.3.0" />
     <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.108</Version>
@@ -174,5 +177,13 @@
     <Resource Include="icons\if_list_1785197.ico" />
     <Resource Include="icons\if_youtube_294703.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Config\Log4Net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy $(ProjectDir)Config Config /I /Y</PreBuildEvent>
+  </PropertyGroup>
 </Project>

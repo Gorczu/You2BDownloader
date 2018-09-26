@@ -62,7 +62,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Text="{Binding Path}"/>
-                            <Button Width="30" Grid.Column="1" Content="..." Command="{Binding FindPath}"/>
+                            <Button Width="30" Height="22" Grid.Column="1" Content="..." Command="{Binding FindPath}"  Margin="5" />
                         </Grid>
                         <TextBox Text="{Binding Gerne}"/>
                         <TextBox Text="{Binding Created}" IsEnabled="False" />

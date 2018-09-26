@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace CommonControls.VM
 {
-    public class UserPlaylistVM : BindableBase
+    public class ListItemViewModel : BindableBase
     {
         private string _name;
-        private byte[] _image;
         private string _gerne;
+        private DateTime _created;
         private string _description;
+        private string _path;
 
         public string Name
         {
@@ -20,16 +21,16 @@ namespace CommonControls.VM
             set => SetProperty(ref _name, value);
         }
 
-        public byte[] Image
-        {
-            get => _image;
-            set => SetProperty(ref _image, value);
-        }
-
         public string Gerne
         {
             get => _gerne;
-            set => SetProperty(ref _gerne ,value);
+            set => SetProperty(ref _gerne, value);
+        }
+
+        public DateTime Created
+        {
+            get => _created;
+            set => SetProperty(ref _created, value);
         }
 
         public string Description
@@ -37,5 +38,12 @@ namespace CommonControls.VM
             get => _description;
             set => SetProperty(ref _description, value);
         }
+
+        public string Path
+        {
+            get => _path;
+            set => SetProperty(ref _path , value);
+        }
+
     }
 }

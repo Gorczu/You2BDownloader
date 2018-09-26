@@ -83,7 +83,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\IUserPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\ListItemViewModel.cs" />
     <Compile Include="ViewModels\UserPlaylistViewModel.cs" />
     <Compile Include="Views\UserPlaylist.xaml.cs">
       <DependentUpon>UserPlaylist.xaml</DependentUpon>
@@ -115,6 +114,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="6.3.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

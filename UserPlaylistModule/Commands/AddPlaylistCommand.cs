@@ -1,4 +1,5 @@
-﻿using Persistence;
+﻿using CommonControls.VM;
+using Persistence;
 using Persistence.Models;
 using Persistence.Respositories;
 using SearchModule.ViewModels;

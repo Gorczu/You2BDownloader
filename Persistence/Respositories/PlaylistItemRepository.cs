@@ -47,7 +47,7 @@ namespace Persistence.Respositories
         {
             var result = _sqlConnection.Query<PlaylistItem>("SELECT * FROM PlayListItem " +
                                                            $"ORDER BY {orderParameterName} " +
-                                                           $"LIMIT {noPerPage}, {pageNo * noPerPage}");
+                                                           $"LIMIT {noPerPage} OFFSET {(pageNo - 1) * noPerPage}");
 
             return result.ToArray();
         }
