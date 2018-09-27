@@ -23,6 +23,7 @@ namespace SearchingModule
         public void Initialize()
         {
             _container.RegisterType<IPlaylistCollector, PlaylistCollector>();
+            
             _container.RegisterTypeForNavigation<Searching>();
         }
     }

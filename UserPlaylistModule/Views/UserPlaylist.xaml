@@ -63,7 +63,9 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Text="{Binding Path}"/>
-                            <Button Width="30" Height="22" Grid.Column="1" Content="..." Command="{Binding FindPath}"  Margin="5" />
+                            <Button Width="30" Height="22" Grid.Column="1" Content="..." 
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" />
                         </Grid>
                         <TextBox Text="{Binding Gerne}"/>
                         <TextBox Text="{Binding Created}" IsEnabled="False" />

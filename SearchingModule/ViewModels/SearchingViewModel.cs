@@ -17,9 +17,11 @@ namespace SearchingModule.ViewModels
     {
         public SearchingViewModel(IPlaylistCollector searchCommand)
         {
+            
             this.SearchCommand = searchCommand;
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             _playlistItemRepository = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
+  
         }
 
         private string _searchText;
@@ -32,7 +34,7 @@ namespace SearchingModule.ViewModels
             get { return _searchText; }
             set { SetProperty(ref _searchText, value); }
         }
-
+        
         public IPlaylistCollector SearchCommand
         {
             get => _searchCommand;

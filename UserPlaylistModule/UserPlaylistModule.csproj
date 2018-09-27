@@ -7,7 +7,7 @@
     <ProjectGuid>{9E09B463-54FC-4928-AC45-7B5774C9F719}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SearchModule</RootNamespace>
+    <RootNamespace>UserPlaylistModule</RootNamespace>
     <AssemblyName>UserPlaylistModule</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,6 +70,8 @@
   <ItemGroup>
     <Compile Include="Commands\AddPlaylistCommand.cs" />
     <Compile Include="Commands\IAddItemCommand.cs" />
+    <Compile Include="Commands\IPathSelector.cs" />
+    <Compile Include="Commands\PathSelector.cs" />
     <Compile Include="UserPlaylistModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

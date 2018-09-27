@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SearchModule.ViewModels
+namespace UserPlaylistModule.ViewModels
 {
     public interface IUserPlaylistViewModel
     {

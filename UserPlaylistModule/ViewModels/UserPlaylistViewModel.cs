@@ -5,8 +5,8 @@ using Persistence.Respositories;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using SearchModule.Commands;
-using SearchModule.ViewModels;
+using UserPlaylistModule.Commands;
+using UserPlaylistModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,16 +19,23 @@ namespace UserPlaylistModule.ViewModels
 {
     public class UserPlaylistViewModel : BindableBase, IUserPlaylistViewModel, INavigationAware
     {
-        private ListItemViewModel _currenItem;
+        private ListItemViewModel _currenItem = new ListItemViewModel();
         private List<ListItemViewModel> _playlistCollection = new List<ListItemViewModel>();
         private IAddItemCommand _addItemCommand;
         private PlaylistRepository _playListPersistence;
 
-        public UserPlaylistViewModel()
+        public UserPlaylistViewModel(IPathSelector pathSelector)
         {
-            
+            this.PathSelector = pathSelector;
+            this.PathSelector.SetPath( path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             AddItemCommand = new AddPlaylistCommand(this);
+        }
+
+        public IPathSelector PathSelector
+        {
+            get;
+            set;
         }
 
         public ListItemViewModel CurrenItem

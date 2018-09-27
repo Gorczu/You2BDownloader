@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 using Persistence;
 using Persistence.Models;
 using Persistence.Respositories;
-using SearchModule.ViewModels;
+using UserPlaylistModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SearchModule.Commands
+namespace UserPlaylistModule.Commands
 {
     public class AddPlaylistCommand : IAddItemCommand
     {
@@ -25,7 +25,7 @@ namespace SearchModule.Commands
 
         private PlaylistRepository _listRepository;
 
-        public AddPlaylistCommand(UserPlaylistModule.ViewModels.UserPlaylistViewModel userPlaylistViewModel)
+        public AddPlaylistCommand(UserPlaylistViewModel userPlaylistViewModel)
         {
             ViewModel = userPlaylistViewModel;
             this._listRepository = new PlaylistRepository(SqlConnector.GetDefaultConnection());

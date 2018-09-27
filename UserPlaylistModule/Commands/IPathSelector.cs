@@ -7,7 +7,8 @@ using System.Windows.Input;
 
 namespace UserPlaylistModule.Commands
 {
-    public interface IAddItemCommand : ICommand
+    public interface IPathSelector : ICommand
     {
+        void SetPath(Action<string> setPathAction);
     }
 }
