@@ -49,7 +49,7 @@ namespace SearchingModule.ViewModels
             }
         }
 
-        private List<ListItemViewModel> _userPlaylist;
+        private List<ListItemViewModel> _userPlaylist = new List<ListItemViewModel>();
         public List<ListItemViewModel> UserPlaylist
         {
             get => _userPlaylist;
@@ -58,10 +58,15 @@ namespace SearchingModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            UserPlaylist = new List<ListItemViewModel>();
+            GetListsFromRepository();
+        }
+
+        private void GetListsFromRepository()
+        {
+            UserPlaylist.Clear();
             foreach (var item in _playListPersistence.GetItems(1, 10, "Name"))
             {
-                UserPlaylist.Add(new ListItemViewModel()
+                _userPlaylist.Add(new ListItemViewModel()
                 {
                     Name = item.Name,
                     Created = item.StartGeneration,
@@ -70,12 +75,12 @@ namespace SearchingModule.ViewModels
                     Path = item.FolderPath
                 });
             }
-
-            
+            RaisePropertyChanged("UserPlaylist");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
+            GetListsFromRepository();
             return true;
         }
 

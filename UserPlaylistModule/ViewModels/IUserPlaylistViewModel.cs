@@ -11,6 +11,6 @@ namespace SearchModule.ViewModels
     public interface IUserPlaylistViewModel
     {
         ListItemViewModel CurrenItem { get; set; }
-        ObservableCollection<ListItemViewModel> PlaylistCollection { get; set; }
+        List<ListItemViewModel> PlaylistCollection { get; set; }
     }
 }

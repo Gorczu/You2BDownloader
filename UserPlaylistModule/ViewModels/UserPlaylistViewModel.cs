@@ -17,7 +17,7 @@ namespace UserPlaylistModule.ViewModels
     public class UserPlaylistViewModel : BindableBase, IUserPlaylistViewModel, INavigationAware
     {
         private ListItemViewModel _currenItem;
-        private ObservableCollection<ListItemViewModel> _playlistCollection;
+        private List<ListItemViewModel> _playlistCollection = new List<ListItemViewModel>();
         private PlaylistRepository _playListPersistence;
 
         public UserPlaylistViewModel()
@@ -31,7 +31,7 @@ namespace UserPlaylistModule.ViewModels
             set => SetProperty(ref _currenItem , value);
         }
 
-        public ObservableCollection<ListItemViewModel> PlaylistCollection
+        public List<ListItemViewModel> PlaylistCollection
         {
             get => _playlistCollection;
             set => SetProperty(ref _playlistCollection ,value);
@@ -39,6 +39,7 @@ namespace UserPlaylistModule.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
+            GetListsFromRepository();
             return true;
         }
 
@@ -49,7 +50,24 @@ namespace UserPlaylistModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            
+            GetListsFromRepository();
+        }
+
+        private void GetListsFromRepository()
+        {
+            _playlistCollection.Clear();
+            foreach (var item in _playListPersistence.GetItems(1, 10, "Name"))
+            {
+                _playlistCollection.Add(new ListItemViewModel()
+                {
+                    Name = item.Name,
+                    Created = item.StartGeneration,
+                    Description = item.Description,
+                    Gerne = item.Gerne,
+                    Path = item.FolderPath
+                });
+            }
+            RaisePropertyChanged("PlaylistCollection");
         }
     }
 }

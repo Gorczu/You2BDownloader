@@ -33,7 +33,7 @@
             <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}" IsDefault="True"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <ListView>
+            <ListView Margin="5" ItemsSource="{Binding UserPlaylist}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <common:UserListView/>

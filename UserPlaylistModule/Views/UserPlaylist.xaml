@@ -4,13 +4,14 @@
              xmlns:local="clr-namespace:UserPlaylistModule.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:CommonControls.Views;assembly=CommonControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <UserControl.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="Height" Value="25"/>
         </Style>
     </UserControl.Resources>
@@ -81,8 +82,17 @@
                 </DockPanel>
             </Border>
         </Grid>
-        <ListView Grid.Row="1" Margin="3" ItemsSource="{Binding Playlist}">
-
+        <ListView Grid.Row="1" Margin="3" ItemsSource="{Binding PlaylistCollection}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <common:UserListView/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
         </ListView>
     </Grid>
 </UserControl>
