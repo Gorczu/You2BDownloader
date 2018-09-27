@@ -1,4 +1,5 @@
 ﻿using CommonControls.VM;
+using Microsoft.Practices.Unity;
 using Persistence;
 using Persistence.Models;
 using Persistence.Respositories;
@@ -12,40 +13,54 @@ using System.Windows.Input;
 
 namespace SearchModule.Commands
 {
-    public class AddPlaylistCommand : ICommand
+    public class AddPlaylistCommand : IAddItemCommand
     {
         private IUserPlaylistViewModel _viewModel;
+        
+        public IUserPlaylistViewModel ViewModel
+        {
+            get => _viewModel;
+            set => _viewModel = value;
+        }
+
         private PlaylistRepository _listRepository;
 
-        public AddPlaylistCommand(IUserPlaylistViewModel viewModel)
+        public AddPlaylistCommand(UserPlaylistModule.ViewModels.UserPlaylistViewModel userPlaylistViewModel)
         {
-            this._viewModel = viewModel;
+            ViewModel = userPlaylistViewModel;
             this._listRepository = new PlaylistRepository(SqlConnector.GetDefaultConnection());
         }
+
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(_viewModel.CurrenItem.Name)
-                && !string.IsNullOrEmpty(_viewModel.CurrenItem.Path);
+            bool result = false;
+            if(ViewModel.CurrenItem!= null)
+            {
+                result = !string.IsNullOrEmpty(ViewModel.CurrenItem.Name)
+                      && !string.IsNullOrEmpty(ViewModel.CurrenItem.Path);
+            }
+
+            return result;
         }
 
         public void Execute(object parameter)
         {
             var persistenceItem = new PlayList()
             {
-                Description = _viewModel.CurrenItem.Description,
-                Gerne = _viewModel.CurrenItem.Gerne,
+                Description = ViewModel.CurrenItem.Description,
+                Gerne = ViewModel.CurrenItem.Gerne,
+                FolderPath = ViewModel.CurrenItem.Path,
+                Name = ViewModel.CurrenItem.Name,
                 StartGeneration = DateTime.Now,
-                FolderPath = _viewModel.CurrenItem.Path,
-                Name = _viewModel.CurrenItem.Name
             };
 
             if(_listRepository.InsertItem(persistenceItem))
             {
-                this._viewModel.PlaylistCollection.Add(_viewModel.CurrenItem);
-                _viewModel.CurrenItem = new ListItemViewModel();
+                this.ViewModel.PlaylistCollection.Add(ViewModel.CurrenItem);
+                ViewModel.CurrenItem = new ListItemViewModel();
             }
         }
     }

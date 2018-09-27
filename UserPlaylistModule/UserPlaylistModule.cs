@@ -4,6 +4,9 @@ using Prism.Regions;
 using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
+using SearchModule.Commands;
+using UserPlaylistModule.ViewModels;
+using SearchModule.ViewModels;
 
 namespace UserPlaylistModule
 {
@@ -21,7 +24,9 @@ namespace UserPlaylistModule
         public void Initialize()
         {
             _container.RegisterTypeForNavigation<UserPlaylist>();
-            
+            //_container.RegisterType<IUserPlaylistViewModel, UserPlaylistViewModel>();
+            //_container.RegisterType<IAddItemCommand, AddPlaylistCommand>();
+
             _regionManager.RequestNavigate("ContentRegion", "UserPlaylist");
         }
     }

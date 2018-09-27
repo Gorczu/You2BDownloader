@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AddPlaylistCommand.cs" />
+    <Compile Include="Commands\IAddItemCommand.cs" />
     <Compile Include="UserPlaylistModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

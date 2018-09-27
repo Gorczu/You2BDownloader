@@ -70,7 +70,7 @@
                         <TextBox Text="{Binding Description}"  Height="56"/>
                     </StackPanel>
                     <DockPanel Grid.ColumnSpan="2" Grid.Row="1" >
-                        <Button DockPanel.Dock="Right" Content="Add Playlist"/>
+                        <Button DockPanel.Dock="Right" Content="Add Playlist" Command="{Binding AddItemCommand}"/>
                     </DockPanel>
                 </Grid>
             </Border>
