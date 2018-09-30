@@ -1,24 +1,40 @@
-﻿using Prism.Mvvm;
+﻿using CommonControls.Validation;
+using Prism.Mvvm;
+using Prism.Validation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CommonControls.VM
 {
-    public class ListItemViewModel : BindableBase
+    public class ListItemViewModel : ValidatableBindableBase
     {
+        public ListItemViewModel()
+        {
+            this.PropertyChanged += (a, b) => this.ValidateProperties();
+          
+        }
+
         private string _name;
         private string _gerne;
         private DateTime _created;
         private string _description;
         private string _path;
 
+        [Required(ErrorMessage ="Name is required.")]
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value);
+            set
+            {
+                SetProperty(ref _name, value);
+                RaisePropertyChanged("NameErrorVisibility");
+            }
         }
 
         public string Gerne
@@ -39,10 +55,45 @@ namespace CommonControls.VM
             set => SetProperty(ref _description, value);
         }
 
+        [NewItemPathValidation(ErrorMessage ="You have to precise path for playlist.")]
         public string Path
         {
             get => _path;
-            set => SetProperty(ref _path , value);
+            set
+            {
+                SetProperty(ref _path, value);
+                RaisePropertyChanged("PathErrorVisibility");
+            }
+        }
+
+        public Visibility NameErrorVisibility
+        {
+            get
+            {
+                if (Errors.Errors.TryGetValue("Name", out ReadOnlyCollection<string> res))
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Collapsed;
+                }
+            }
+        }
+
+        public Visibility PathErrorVisibility
+        {
+            get
+            {
+                if (Errors.Errors.TryGetValue("Path", out ReadOnlyCollection<string> res))
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Collapsed;
+                }
+            }
         }
 
     }

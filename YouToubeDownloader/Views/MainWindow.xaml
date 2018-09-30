@@ -4,7 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:prop="clr-namespace:YouToubeDownloader.Properties"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="550" Width="560" x:Name="window">
+        Title="{Binding Title}" MinHeight="480" MinWidth="520" Height="550" Width="860" x:Name="window">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="85"/>
@@ -21,6 +21,10 @@
                 <Style TargetType="Image">
                     <Setter Property="Height"  Value="30"/>
                     <Setter Property="Margin"  Value="1"/>
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize"  Value="8"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
             </StackPanel.Resources>
             <RadioButton   Command="{Binding Path=ChangeSite}" CommandParameter="Searching">

@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:common="clr-namespace:CommonControls.Views;assembly=CommonControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500"
+             d:DesignHeight="300" d:DesignWidth="800"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <UserControl.Resources>
@@ -23,6 +23,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
 
@@ -56,22 +57,35 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" DataContext="{Binding CurrenItem}">
-                        <TextBox Text="{Binding Name}" />
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  />
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Text="{Binding Path}"/>
+                            <TextBox Text="{Binding Path , UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Width="30" Height="22" Grid.Column="1" Content="..." 
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, 
 AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" />
                         </Grid>
-                        <TextBox Text="{Binding Gerne}"/>
+                        <TextBox Text="{Binding Gerne , UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Text="{Binding Created}" IsEnabled="False" />
-                        <TextBox Text="{Binding Description}"  Height="56"/>
+                        <TextBox Text="{Binding Description , UpdateSourceTrigger=PropertyChanged}"  Height="56"/>
                     </StackPanel>
                     <DockPanel Grid.ColumnSpan="2" Grid.Row="1" >
+                        <StackPanel DockPanel.Dock="Top" Margin="5">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                    <Setter Property="FontSize" Value="9"/>
+                                    <Setter Property="FontSize" Value="9"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock DataContext="{Binding CurrenItem}" Text="{Binding Errors.Errors[Name][0], 
+                               UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding NameErrorVisibility}"/>
+                            <TextBlock DataContext="{Binding CurrenItem}" Text="{Binding Errors.Errors[Path][0],
+                                UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding PathErrorVisibility}"/>
+                        </StackPanel>
                         <Button DockPanel.Dock="Right" Content="Add Playlist" Command="{Binding AddItemCommand}"/>
                     </DockPanel>
                 </Grid>

@@ -27,11 +27,11 @@ namespace Persistence.Respositories
         public bool EditItem(int idx, PlayList newValue)
         {
             int result = _sqlConnection.Execute(" UPDATE PlayList " +
-                                                $"SET FolderPath={newValue.FolderPath}, " +
-                                                $"SET Description={newValue.Description}, " +
-                                                $"SET Name={newValue.Name}, " +
-                                                $"SET Gerne={newValue.Gerne} " +
-                                                $"SET StartGeneration={newValue.StartGeneration} " +
+                                                $"SET FolderPath='{newValue.FolderPath}', " +
+                                                $"SET Description='{newValue.Description}', " +
+                                                $"SET Name='{newValue.Name}', " +
+                                                $"SET Gerne='{newValue.Gerne}' " +
+                                                $"SET StartGeneration='{newValue.StartGeneration}' " +
                                                 $"WHERE Id={newValue.Id} ");
             return result != 0;
         }
@@ -56,8 +56,8 @@ namespace Persistence.Respositories
         public bool InsertItem(PlayList item)
         {
             int result = _sqlConnection.Execute($"INSERT INTO PlayList(Description, FolderPath, Gerne, Name) " +
-                                                $"VALUE ({item.Description}, {item.FolderPath}, {item.Gerne}, " +
-                                                $"{item.Name} )");
+                                                $"VALUES ('{item.Description}', '{item.FolderPath}', '{item.Gerne}', " +
+                                                $" '{item.Name}' )");
             return result != 0;
         }
     }

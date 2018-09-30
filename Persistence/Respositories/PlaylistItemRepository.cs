@@ -27,10 +27,10 @@ namespace Persistence.Respositories
         public bool EditItem(int idx, PlaylistItem newValue)
         {
             int result = _sqlConnection.Execute(" UPDATE PlayListItem " +
-                                                $"SET Address={newValue.Address}, " +
-                                                $"SET Description={newValue.Description}, " +
-                                                $"SET NewName={newValue.NewName} " +
-                                                $"SET Data={newValue.Data} " +
+                                                $"SET Address='{newValue.Address}', " +
+                                                $"SET Description='{newValue.Description}', " +
+                                                $"SET NewName='{newValue.NewName}' " +
+                                                $"SET Data='{newValue.Data}' " +
                                                 $"WHERE Id={newValue.Id} ");
             return result != 0; 
         }
@@ -56,8 +56,8 @@ namespace Persistence.Respositories
         {
             int result = _sqlConnection.Execute($"INSERT INTO PlayListItem(Address, Description, NewName, Data, " +
                                                 $"PlayListId) " +
-                                                $"VALUE ({item.Address}, {item.Description}, {item.NewName}, " +
-                                                $"{item.Data}, {item.PlayListId})");
+                                                $"VALUES ('{item.Address}', '{item.Description}', '{item.NewName}', " +
+                                                $"'{item.Data}', '{item.PlayListId}')");
             return result != 0;
         }
     }

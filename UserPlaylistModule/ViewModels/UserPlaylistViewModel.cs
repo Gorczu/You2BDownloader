@@ -20,16 +20,19 @@ namespace UserPlaylistModule.ViewModels
     public class UserPlaylistViewModel : BindableBase, IUserPlaylistViewModel, INavigationAware
     {
         private ListItemViewModel _currenItem = new ListItemViewModel();
-        private List<ListItemViewModel> _playlistCollection = new List<ListItemViewModel>();
+        private ObservableCollection<ListItemViewModel> _playlistCollection = 
+            new ObservableCollection<ListItemViewModel>();
         private IAddItemCommand _addItemCommand;
         private PlaylistRepository _playListPersistence;
 
         public UserPlaylistViewModel(IPathSelector pathSelector)
         {
+
             this.PathSelector = pathSelector;
             this.PathSelector.SetPath( path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             AddItemCommand = new AddPlaylistCommand(this);
+            
         }
 
         public IPathSelector PathSelector
@@ -44,7 +47,7 @@ namespace UserPlaylistModule.ViewModels
             set => SetProperty(ref _currenItem , value);
         }
         
-        public List<ListItemViewModel> PlaylistCollection
+        public ObservableCollection<ListItemViewModel> PlaylistCollection
         {
             get => _playlistCollection;
             set => SetProperty(ref _playlistCollection ,value);

@@ -10,28 +10,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.IO;
 
 namespace UserPlaylistModule.Commands
 {
     public class AddPlaylistCommand : IAddItemCommand
     {
         private IUserPlaylistViewModel _viewModel;
-        
+        private PlaylistRepository _listRepository;
+
         public IUserPlaylistViewModel ViewModel
         {
             get => _viewModel;
             set => _viewModel = value;
         }
 
-        private PlaylistRepository _listRepository;
 
         public AddPlaylistCommand(UserPlaylistViewModel userPlaylistViewModel)
         {
+            
             ViewModel = userPlaylistViewModel;
             this._listRepository = new PlaylistRepository(SqlConnector.GetDefaultConnection());
+            this._viewModel.CurrenItem.PropertyChanged += (a, b) => CanExecuteChanged(a, b);
         }
-
-
+        
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -40,7 +43,8 @@ namespace UserPlaylistModule.Commands
             if(ViewModel.CurrenItem!= null)
             {
                 result = !string.IsNullOrEmpty(ViewModel.CurrenItem.Name)
-                      && !string.IsNullOrEmpty(ViewModel.CurrenItem.Path);
+                      && !string.IsNullOrEmpty(ViewModel.CurrenItem.Path)
+                      && Directory.Exists(ViewModel.CurrenItem.Path);
             }
 
             return result;
@@ -60,7 +64,7 @@ namespace UserPlaylistModule.Commands
             if(_listRepository.InsertItem(persistenceItem))
             {
                 this.ViewModel.PlaylistCollection.Add(ViewModel.CurrenItem);
-                ViewModel.CurrenItem = new ListItemViewModel();
+                this.ViewModel.CurrenItem = new ListItemViewModel();
             }
         }
     }

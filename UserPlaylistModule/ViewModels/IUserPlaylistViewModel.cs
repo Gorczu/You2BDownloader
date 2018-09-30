@@ -11,6 +11,6 @@ namespace UserPlaylistModule.ViewModels
     public interface IUserPlaylistViewModel
     {
         ListItemViewModel CurrenItem { get; set; }
-        List<ListItemViewModel> PlaylistCollection { get; set; }
+        ObservableCollection<ListItemViewModel> PlaylistCollection { get; set; }
     }
 }
