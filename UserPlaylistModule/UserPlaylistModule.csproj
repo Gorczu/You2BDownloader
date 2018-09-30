@@ -71,7 +71,9 @@
     <Compile Include="Commands\AddPlaylistCommand.cs" />
     <Compile Include="Commands\IAddItemCommand.cs" />
     <Compile Include="Commands\IPathSelector.cs" />
+    <Compile Include="Commands\IRemovePlaylist.cs" />
     <Compile Include="Commands\PathSelector.cs" />
+    <Compile Include="Commands\RemovePlaylist.cs" />
     <Compile Include="UserPlaylistModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

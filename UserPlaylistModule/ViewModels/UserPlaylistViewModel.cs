@@ -24,6 +24,7 @@ namespace UserPlaylistModule.ViewModels
             new ObservableCollection<ListItemViewModel>();
         private IAddItemCommand _addItemCommand;
         private PlaylistRepository _playListPersistence;
+        private IRemovePlaylist _removePlaylist;
 
         public UserPlaylistViewModel(IPathSelector pathSelector)
         {
@@ -32,7 +33,7 @@ namespace UserPlaylistModule.ViewModels
             this.PathSelector.SetPath( path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             AddItemCommand = new AddPlaylistCommand(this);
-            
+            RemovePlaylist = new RemovePlaylist(this);
         }
 
         public IPathSelector PathSelector
@@ -58,6 +59,12 @@ namespace UserPlaylistModule.ViewModels
         {
             get => _addItemCommand;
             set => _addItemCommand = value;
+        }
+
+        public IRemovePlaylist RemovePlaylist
+        {
+            get => _removePlaylist;
+            set => _removePlaylist = value;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

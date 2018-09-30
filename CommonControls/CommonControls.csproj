@@ -93,11 +93,16 @@
       <Version>1.2.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ResourcesCommonControls\deleteFolder.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourcesCommonControls\picture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourcesCommonControls\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

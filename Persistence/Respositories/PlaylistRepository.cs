@@ -20,7 +20,7 @@ namespace Persistence.Respositories
 
         public bool DeleteItem(int idx)
         {
-            int result = _sqlConnection.Execute($"DELETE FROM PlayList WHERE Id={idx}");
+            int result = _sqlConnection.Execute($"DELETE FROM PlayList WHERE Id = {idx};");
             return result != 0;
         }
 
@@ -32,7 +32,7 @@ namespace Persistence.Respositories
                                                 $"SET Name='{newValue.Name}', " +
                                                 $"SET Gerne='{newValue.Gerne}' " +
                                                 $"SET StartGeneration='{newValue.StartGeneration}' " +
-                                                $"WHERE Id={newValue.Id} ");
+                                                $"WHERE Id = {newValue.Id}; ");
             return result != 0;
         }
 
@@ -40,6 +40,14 @@ namespace Persistence.Respositories
         {
             var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
                                                        $"WHERE Id={idx}");
+
+            return result.FirstOrDefault() ?? null;
+        }
+
+        public PlayList GetItemByName(string name)
+        {
+            var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
+                                                       $"WHERE Name='{name}'");
 
             return result.FirstOrDefault() ?? null;
         }
