@@ -12,5 +12,6 @@ namespace UserPlaylistModule.ViewModels
     {
         ListItemViewModel CurrenItem { get; set; }
         ObservableCollection<ListItemViewModel> PlaylistCollection { get; set; }
+        ObservableCollection<SingleItemViewModel> SelectedPlayListItemCollection { get; set; }
     }
 }

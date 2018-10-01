@@ -67,6 +67,13 @@ namespace UserPlaylistModule.ViewModels
             set => _removePlaylist = value;
         }
 
+        private ObservableCollection<SingleItemViewModel> _selectedPlayListItemCollection;
+        public ObservableCollection<SingleItemViewModel> SelectedPlayListItemCollection
+        {
+            get => _selectedPlayListItemCollection;
+            set => SetProperty(ref _selectedPlayListItemCollection, value);
+        }
+
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             GetListsFromRepository();

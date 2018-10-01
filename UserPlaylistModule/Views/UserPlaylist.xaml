@@ -26,8 +26,8 @@
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="320"/>
             </Grid.ColumnDefinitions>
-
-            <Border Margin="5" BorderBrush="Gray" BorderThickness="0.5">
+            
+            <Border Margin="15,25, 5,15" BorderBrush="Gray" BorderThickness="0.5">
                 <Grid >
                     <Grid.Resources>
                         <Style TargetType="Label">
@@ -91,12 +91,27 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
                 </Grid>
             </Border>
 
-            <Border Grid.Column="1" Margin="5" BorderBrush="Gray" BorderThickness="0.5">
+            <Border Grid.Column="1" Margin="5, 25, 15, 15" BorderBrush="Gray" BorderThickness="0.5">
                 <DockPanel  LastChildFill="True" >
                     <Button Content="Choose picture" DockPanel.Dock="Bottom"/>
-                    <Image Source="{Binding Image}"/>
+                    <Image Source="{Binding CurrenItem.Image}"/>
                 </DockPanel>
             </Border>
+            
+            <GroupBox Grid.Column="0" Grid.ColumnSpan="2" Header="New Playlist" Margin="5" >
+            </GroupBox>
+            
+            <GroupBox Header="Items in selected playlist" Grid.Column="2" Margin="5">
+                <DataGrid Margin="3" ItemsSource="{Binding SelectedPlayListItemCollection}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nr" Binding="{Binding Address}" Width="30"/>
+                        <DataGridTextColumn Header="New Name" Binding="{Binding NewName}" Width="*"/>
+                        <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>    
+            </GroupBox>
+            
         </Grid>
         <ListView Grid.Row="1" Margin="3" ItemsSource="{Binding PlaylistCollection}">
             <ListView.ItemTemplate>
