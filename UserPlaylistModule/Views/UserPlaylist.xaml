@@ -24,7 +24,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="320"/>
             </Grid.ColumnDefinitions>
 
             <Border Margin="5" BorderBrush="Gray" BorderThickness="0.5">
@@ -94,7 +94,7 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
             <Border Grid.Column="1" Margin="5" BorderBrush="Gray" BorderThickness="0.5">
                 <DockPanel  LastChildFill="True" >
                     <Button Content="Choose picture" DockPanel.Dock="Bottom"/>
-                    <Image/>
+                    <Image Source="{Binding Image}"/>
                 </DockPanel>
             </Border>
         </Grid>
@@ -110,5 +110,7 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
+        
+        
     </Grid>
 </UserControl>

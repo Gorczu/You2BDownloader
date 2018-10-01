@@ -32,6 +32,7 @@ namespace Persistence.Respositories
                                                 $"SET Name='{newValue.Name}', " +
                                                 $"SET Gerne='{newValue.Gerne}' " +
                                                 $"SET StartGeneration='{newValue.StartGeneration}' " +
+                                                $"SET Image='{newValue.Image}' " +
                                                 $"WHERE Id = {newValue.Id}; ");
             return result != 0;
         }
@@ -63,9 +64,9 @@ namespace Persistence.Respositories
 
         public bool InsertItem(PlayList item)
         {
-            int result = _sqlConnection.Execute($"INSERT INTO PlayList(Description, FolderPath, Gerne, Name) " +
+            int result = _sqlConnection.Execute($"INSERT INTO PlayList(Description, FolderPath, Gerne, Name, Image) " +
                                                 $"VALUES ('{item.Description}', '{item.FolderPath}', '{item.Gerne}', " +
-                                                $" '{item.Name}' )");
+                                                $" '{item.Name}', '{item.Image}')");
             return result != 0;
         }
     }

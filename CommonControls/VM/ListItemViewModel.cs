@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace CommonControls.VM
         private DateTime _created;
         private string _description;
         private string _path;
+        private byte[] _image = File.ReadAllBytes("ResourcesCommonControls/stormtrooper.png");
 
         [Required(ErrorMessage ="Name is required.")]
         public string Name
@@ -64,6 +66,12 @@ namespace CommonControls.VM
                 SetProperty(ref _path, value);
                 RaisePropertyChanged("PathErrorVisibility");
             }
+        }
+
+        public byte[] Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
         }
 
         public Visibility NameErrorVisibility

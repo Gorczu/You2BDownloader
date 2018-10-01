@@ -104,5 +104,13 @@
   <ItemGroup>
     <Resource Include="ResourcesCommonControls\delete.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourcesCommonControls\stormtrooper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy $(ProjectDir)ResourcesCommonControls $(SolutionDir)\YouToubeDownloader\bin\$(ConfigurationName)\ResourcesCommonControls /I /Y</PreBuildEvent>
+  </PropertyGroup>
 </Project>

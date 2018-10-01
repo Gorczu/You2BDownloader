@@ -15,5 +15,6 @@ namespace Persistence.Models
         public string Description { get; set; }
         public string Gerne { get; set; }
         public DateTime StartGeneration { get; set; }
+        public byte[] Image { get; set; }
     }
 }

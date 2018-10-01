@@ -59,6 +59,7 @@ namespace UserPlaylistModule.Commands
                 FolderPath = ViewModel.CurrenItem.Path,
                 Name = ViewModel.CurrenItem.Name,
                 StartGeneration = DateTime.Now,
+                Image = ViewModel.CurrenItem.Image
             };
 
             if(_listRepository.InsertItem(persistenceItem))
