@@ -20,18 +20,20 @@ namespace UserPlaylistModule.ViewModels
     public class UserPlaylistViewModel : BindableBase, IUserPlaylistViewModel, INavigationAware
     {
         private ListItemViewModel _currenItem = new ListItemViewModel();
-        private ObservableCollection<ListItemViewModel> _playlistCollection = 
+        private ObservableCollection<ListItemViewModel> _playlistCollection =
             new ObservableCollection<ListItemViewModel>();
         private IAddItemCommand _addItemCommand;
         private PlaylistRepository _playListPersistence;
+        private PlaylistItemRepository _playListItemPersistence;
         private IRemovePlaylist _removePlaylist;
 
         public UserPlaylistViewModel(IPathSelector pathSelector)
         {
 
             this.PathSelector = pathSelector;
-            this.PathSelector.SetPath( path => this._currenItem.Path = path);
+            this.PathSelector.SetPath(path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
+            _playListItemPersistence = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
             AddItemCommand = new AddPlaylistCommand(this);
             RemovePlaylist = new RemovePlaylist(this);
         }
@@ -45,16 +47,16 @@ namespace UserPlaylistModule.ViewModels
         public ListItemViewModel CurrenItem
         {
             get => _currenItem;
-            set => SetProperty(ref _currenItem , value);
+            set => SetProperty(ref _currenItem, value);
         }
-        
+
         public ObservableCollection<ListItemViewModel> PlaylistCollection
         {
             get => _playlistCollection;
-            set => SetProperty(ref _playlistCollection ,value);
+            set => SetProperty(ref _playlistCollection, value);
         }
 
-        
+
         public IAddItemCommand AddItemCommand
         {
             get => _addItemCommand;
@@ -67,11 +69,41 @@ namespace UserPlaylistModule.ViewModels
             set => _removePlaylist = value;
         }
 
-        private ObservableCollection<SingleItemViewModel> _selectedPlayListItemCollection;
+        private ObservableCollection<SingleItemViewModel> _selectedPlayListItemCollection = 
+            new ObservableCollection<SingleItemViewModel>();
+
         public ObservableCollection<SingleItemViewModel> SelectedPlayListItemCollection
         {
             get => _selectedPlayListItemCollection;
             set => SetProperty(ref _selectedPlayListItemCollection, value);
+        }
+
+        private ListItemViewModel _selectedPlaylist;
+        public ListItemViewModel SelectedPlaylist
+        {
+            get => _selectedPlaylist;
+            set => SetProperty(ref _selectedPlaylist, value);
+        }
+
+        public DelegateCommand SelectedPlaylistChanged
+        {
+            get
+            {
+                return new DelegateCommand(() => {
+                    SelectedPlayListItemCollection.Clear();
+                    foreach (var item in _playListItemPersistence.GetItemsWhere(_selectedPlaylist.Id.ToString(),
+                        "PlayListId"))
+                    {
+                        SelectedPlayListItemCollection.Add(new SingleItemViewModel()
+                        {
+                            NewName = item.NewName,
+                            Address = item.Address,
+                            Description = item.Description,
+                            PlayListId= item.PlayListId
+                        });
+                    }
+                });
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -105,6 +137,7 @@ namespace UserPlaylistModule.ViewModels
                 });
             }
             RaisePropertyChanged("PlaylistCollection");
+            
         }
     }
 }

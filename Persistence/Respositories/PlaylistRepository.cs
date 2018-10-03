@@ -62,6 +62,14 @@ namespace Persistence.Respositories
             return result.ToArray();
         }
 
+        public IList<PlayList> GetItemsWhere(string value, string columnName)
+        {
+            var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayListItem " +
+                                                       $"WHERE {columnName}={value}");
+
+            return result.ToArray();
+        }
+
         public bool InsertItem(PlayList item)
         {
             int result = _sqlConnection.Execute($"INSERT INTO PlayList(Description, FolderPath, Gerne, Name, Image) " +

@@ -18,15 +18,22 @@ namespace CommonControls.VM
         public ListItemViewModel()
         {
             this.PropertyChanged += (a, b) => this.ValidateProperties();
-          
         }
 
+        private int _id;
         private string _name;
         private string _gerne;
         private DateTime _created;
         private string _description;
         private string _path;
         private byte[] _image = File.ReadAllBytes("ResourcesCommonControls/stormtrooper.png");
+
+
+        public int Id
+        {
+            get => _id;
+            set => SetProperty(ref _id , value);
+        }
 
         [Required(ErrorMessage ="Name is required.")]
         public string Name

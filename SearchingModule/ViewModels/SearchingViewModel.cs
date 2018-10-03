@@ -70,6 +70,7 @@ namespace SearchingModule.ViewModels
             {
                 _userPlaylist.Add(new ListItemViewModel()
                 {
+                    Id= item.Id,
                     Name = item.Name,
                     Created = item.StartGeneration,
                     Description = item.Description,

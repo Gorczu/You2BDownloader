@@ -10,6 +10,7 @@ namespace Persistence
     interface IRepository<T>
     {
         IList<T> GetItems(int pageNo, int noPerPage, string orderParameterName);
+        IList<T> GetItemsWhere(string value, string columnName);
         T GetItem(int idx);
         bool EditItem(int idx, T newValue);
         bool DeleteItem(int idx);

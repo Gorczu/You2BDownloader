@@ -30,8 +30,7 @@ namespace UserPlaylistModule.Commands
         public void Execute(object parameter)
         {
             var itemToRemove = (ListItemViewModel)parameter;
-            var itemInRepo = _listRepository.GetItemByName(itemToRemove.Name);
-            if (_listRepository.DeleteItem(itemInRepo.Id))
+            if (_listRepository.DeleteItem(itemToRemove.Id))
             {
                 this._viewModel.PlaylistCollection.Remove(itemToRemove);
             }

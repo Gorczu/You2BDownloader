@@ -65,6 +65,7 @@ namespace UserPlaylistModule.Commands
             if(_listRepository.InsertItem(persistenceItem))
             {
                 this.ViewModel.PlaylistCollection.Add(ViewModel.CurrenItem);
+                ViewModel.CurrenItem.Id = _listRepository.GetItemByName(ViewModel.CurrenItem.Name).Id;
                 this.ViewModel.CurrenItem = new ListItemViewModel();
             }
         }
