@@ -110,6 +110,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>xcopy $(ProjectDir)ResourcesCommonControls $(SolutionDir)\YouToubeDownloader\bin\$(ConfigurationName)\ResourcesCommonControls /I /Y</PreBuildEvent>

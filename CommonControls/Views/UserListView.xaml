@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CommonControls.Views"
-             mc:Ignorable="d" 
-             Height="95" Width="190" Background="#FFF1F0F0" Margin="2" >
-    <Border BorderThickness="0.5" BorderBrush="LightGray">
-        <Grid>
+             mc:Ignorable="d" AllowDrop="True"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             Height="95" Width="190" Background="#FFF1F0F0" Margin="2" Drop="PlaylistItem_drop">
+    <Border BorderThickness="0.5" BorderBrush="LightGray" >
+        <Grid DragOver="DragOver">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontSize" Value="9"/>

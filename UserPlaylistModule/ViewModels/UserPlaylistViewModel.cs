@@ -29,7 +29,6 @@ namespace UserPlaylistModule.ViewModels
 
         public UserPlaylistViewModel(IPathSelector pathSelector)
         {
-
             this.PathSelector = pathSelector;
             this.PathSelector.SetPath(path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
