@@ -40,7 +40,7 @@ namespace SearchingModule.Views
                 data.SetData("DataContext", this.DataContext);
 
                 // Inititate the drag-and-drop operation.
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Copy | DragDropEffects.Move);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Copy);
             }
         }
 

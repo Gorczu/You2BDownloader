@@ -10,10 +10,11 @@ using CommonControls.VM;
 using Prism.Regions;
 using Persistence.Respositories;
 using Persistence;
+using System.Windows.Input;
 
 namespace SearchingModule.ViewModels
 {
-    public class SearchingViewModel : BindableBase, ISearchingViewModel, INavigationAware
+    public class SearchingViewModel : BindableBase, ISearchingViewModel, INavigationAware, IDbObjectInserter
     {
         public SearchingViewModel(IPlaylistCollector searchCommand)
         {
@@ -90,6 +91,36 @@ namespace SearchingModule.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             
+        }
+
+        public ICommand Drop
+        {
+            get
+            {
+                return new DelegateCommand<ListItemViewModel>(obj =>
+                {
+                    if(obj.ObjectToInsert!= null)
+                    {
+
+                    }
+                });
+            }
+        }
+
+        public void InsertElement(object element)
+        {
+            if(element is YoutubeMovie)
+            {
+
+            }
+            else if(element is YoutubeChanel)
+            {
+
+            }
+            else if(element is YoutubePlaylist)
+            {
+
+            }            
         }
     }
 }

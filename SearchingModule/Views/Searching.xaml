@@ -9,6 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <UserControl.Resources>
         <Style TargetType="TextBox" >
@@ -36,7 +37,16 @@
             <ListView Margin="5" ItemsSource="{Binding UserPlaylist}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <common:UserListView/>
+                        <common:UserListView>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Drop">
+                                    <i:InvokeCommandAction Command="{Binding 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}},
+                                        Path=DataContext.Drop}"
+                                        CommandParameter="{Binding}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </common:UserListView>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemsPanel>

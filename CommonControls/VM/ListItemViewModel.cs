@@ -27,7 +27,7 @@ namespace CommonControls.VM
         private string _description;
         private string _path;
         private byte[] _image = File.ReadAllBytes("ResourcesCommonControls/stormtrooper.png");
-
+        private Object _objectToInsert; 
 
         public int Id
         {
@@ -111,5 +111,10 @@ namespace CommonControls.VM
             }
         }
 
+        public object ObjectToInsert
+        {
+            get => _objectToInsert;
+            set => _objectToInsert = value;
+        }
     }
 }

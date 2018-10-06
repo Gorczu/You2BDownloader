@@ -34,21 +34,15 @@ namespace CommonControls.Views
         {
             if(e.Data!=null)
             {
-                //YoutubeMovie typ tutaj wstrzyknac typy
-                var item = (SingleItemViewModel)e.Data.GetData("DataContext");
-                _playListItemPersistence.InsertItem(new Persistence.Models.PlaylistItem()
-                {
-                    Address = item.Address??null,
-                    Description = item.Description??null,
-                    NewName = item.NewName??null,
-                    PlayListId = ((ListItemViewModel)this.DataContext).Id,
-                });
+                ////YoutubeMovie typ tutaj wstrzyknac typy
+                var item = e.Data.GetData("DataContext");
+                ((ListItemViewModel)this.DataContext).ObjectToInsert = item;
             }
         }
 
         private void DragOver(object sender, DragEventArgs e)
         {
-            e.Effects = DragDropEffects.Move;
+            e.Effects = DragDropEffects.Copy;
         }
     }
 }

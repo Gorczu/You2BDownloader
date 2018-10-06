@@ -64,6 +64,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Validation\NewItemPathValidation.cs" />
+    <Compile Include="VM\IDbObjectInsert.cs" />
     <Compile Include="VM\ListItemViewModel.cs" />
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
