@@ -70,8 +70,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\ChanelToDbInserter.cs" />
     <Compile Include="BusinessLogic\IPlaylistCollector.cs" />
+    <Compile Include="BusinessLogic\MovieToDbInserter.cs" />
     <Compile Include="BusinessLogic\PlaylistCollector.cs" />
+    <Compile Include="BusinessLogic\ITaskToDbInserter.cs" />
+    <Compile Include="BusinessLogic\PlaylistToDbInserter.cs" />
     <Compile Include="BusinessLogic\YoutubeItemType.cs" />
     <Compile Include="SearchingModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

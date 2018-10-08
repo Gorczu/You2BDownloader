@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
+using SearchingModule.BusinessLogic;
 
 namespace SearchingModule.ViewModels
 {
     public abstract class YoutubeItem : BindableBase
     {
+        public abstract IList<YoutubeItem> GetAllElements();
+
         private string _name;
 
         private string _source;

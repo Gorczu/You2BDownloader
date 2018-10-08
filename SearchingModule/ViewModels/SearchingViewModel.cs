@@ -101,15 +101,18 @@ namespace SearchingModule.ViewModels
                 {
                     if(obj.ObjectToInsert!= null)
                     {
-
+                        InsertElement(obj.ObjectToInsert);
                     }
                 });
             }
         }
 
+    
+
         public void InsertElement(object element)
         {
-            if(element is YoutubeMovie)
+            ITaskToDbInserter < YoutubeItem > inserter = 
+            if (element is YoutubeMovie)
             {
 
             }

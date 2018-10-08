@@ -1,4 +1,5 @@
-﻿using SearchingModule.ViewModels;
+﻿using SearchingModule.BusinessLogic;
+using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,9 @@ namespace SearchingModule.ViewModels
 {
     public class YoutubeMovie : YoutubeItem
     {
+        public override IList<YoutubeItem> GetAllElements()
+        {
+            return new YoutubeItem[] { this };
+        }
     }
 }

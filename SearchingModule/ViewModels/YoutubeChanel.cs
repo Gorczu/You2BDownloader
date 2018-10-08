@@ -11,6 +11,15 @@ namespace SearchingModule.ViewModels
     {
         public IList<YoutubeMovie> YoutubeMovies { get; set; }
 
+        public override IList<YoutubeItem> GetAllElements()
+        {
+            IList<YoutubeItem> result = new List<YoutubeItem>();
+
+
+
+            return result;
+        }
+
         public IList<YoutubeMovie> GetItems()
         {
             return YoutubeMovies;
