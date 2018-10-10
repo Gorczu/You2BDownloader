@@ -9,7 +9,7 @@ namespace SearchingModule.BusinessLogic
 {
     public class MovieToDbInserter<T> : ITaskToDbInserter<T> where T: YoutubeItem
     {
-        public bool InsertAllElements(T element)
+        public bool InsertAllElements(T element, int playListId)
         {
             throw new NotImplementedException();
         }

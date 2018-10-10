@@ -1,4 +1,6 @@
-﻿using SearchingModule.ViewModels;
+﻿using Persistence;
+using Persistence.Respositories;
+using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,21 @@ namespace SearchingModule.BusinessLogic
 {
     public class ChanelToDbInserter<T> : ITaskToDbInserter<T> where T : YoutubeItem
     {
-        public bool InsertAllElements(T element)
+        private static PlaylistItemRepository _playlistItemRepository 
+            = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
+
+        public bool InsertAllElements(T element,int playListId)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            foreach(var item in element.GetAllElements())
+            {
+                result |= _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
+                {
+                    NewName = item.Name,
+                    Address = item.Source
+                });
+            }
+            return result;
         }
     }
 }

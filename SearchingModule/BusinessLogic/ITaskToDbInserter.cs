@@ -9,6 +9,6 @@ namespace SearchingModule.BusinessLogic
 {
     public interface ITaskToDbInserter<T> where T : YoutubeItem
     {
-        bool InsertAllElements(T element);
+        bool InsertAllElements(T element, int playListId);
     }
 }

@@ -12,6 +12,8 @@ namespace SearchingModule.ViewModels
     {
         public abstract IList<YoutubeItem> GetAllElements();
 
+        public abstract ITaskToDbInserter<YoutubeItem> GetInserter();
+
         private string _name;
 
         private string _source;

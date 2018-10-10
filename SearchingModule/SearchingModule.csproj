@@ -54,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +77,7 @@
     <Compile Include="BusinessLogic\PlaylistCollector.cs" />
     <Compile Include="BusinessLogic\ITaskToDbInserter.cs" />
     <Compile Include="BusinessLogic\PlaylistToDbInserter.cs" />
+    <Compile Include="BusinessLogic\YouTubeAPI\PlaylistItemsResponse.cs" />
     <Compile Include="BusinessLogic\YoutubeItemType.cs" />
     <Compile Include="SearchingModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

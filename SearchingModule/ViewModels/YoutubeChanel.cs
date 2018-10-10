@@ -1,4 +1,5 @@
-﻿using SearchingModule.ViewModels;
+﻿using SearchingModule.BusinessLogic;
+using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,13 @@ namespace SearchingModule.ViewModels
         public override IList<YoutubeItem> GetAllElements()
         {
             IList<YoutubeItem> result = new List<YoutubeItem>();
+            
+            return result;
+        }
 
-
-
+        public override ITaskToDbInserter<YoutubeItem> GetInserter()
+        {
+            ITaskToDbInserter<YoutubeItem> result  = new ChanelToDbInserter<YoutubeItem>();
             return result;
         }
 

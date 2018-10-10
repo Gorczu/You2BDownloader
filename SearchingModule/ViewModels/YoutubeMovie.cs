@@ -14,5 +14,11 @@ namespace SearchingModule.ViewModels
         {
             return new YoutubeItem[] { this };
         }
+
+        public override ITaskToDbInserter<YoutubeItem> GetInserter()
+        {
+            ITaskToDbInserter<YoutubeItem> result = new MovieToDbInserter<YoutubeItem>();
+            return result; ;
+        }
     }
 }

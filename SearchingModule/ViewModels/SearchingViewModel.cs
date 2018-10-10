@@ -18,7 +18,6 @@ namespace SearchingModule.ViewModels
     {
         public SearchingViewModel(IPlaylistCollector searchCommand)
         {
-            
             this.SearchCommand = searchCommand;
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             _playlistItemRepository = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
@@ -93,6 +92,11 @@ namespace SearchingModule.ViewModels
             
         }
 
+        public void InsertElement(object element)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICommand Drop
         {
             get
@@ -101,29 +105,14 @@ namespace SearchingModule.ViewModels
                 {
                     if(obj.ObjectToInsert!= null)
                     {
-                        InsertElement(obj.ObjectToInsert);
+                        YoutubeItem youTubeItem = (YoutubeItem)obj.ObjectToInsert;
+                        var inserter = youTubeItem.GetInserter();
+                        bool inserted = inserter.InsertAllElements(youTubeItem, obj.Id);
                     }
                 });
             }
         }
-
-    
-
-        public void InsertElement(object element)
-        {
-            ITaskToDbInserter < YoutubeItem > inserter = 
-            if (element is YoutubeMovie)
-            {
-
-            }
-            else if(element is YoutubeChanel)
-            {
-
-            }
-            else if(element is YoutubePlaylist)
-            {
-
-            }            
-        }
+        
+        
     }
 }
