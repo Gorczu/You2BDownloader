@@ -51,7 +51,7 @@ namespace SearchingModule.Views
             // DragOver event handler.
             if (e.Effects.HasFlag(DragDropEffects.Copy))
             {
-                Mouse.SetCursor(Cursors.Cross);
+                Mouse.SetCursor(Cursors.UpArrow);
             }
             else if (e.Effects.HasFlag(DragDropEffects.Move))
             {

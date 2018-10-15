@@ -33,6 +33,7 @@ namespace UserPlaylistModule.ViewModels
             this.PathSelector.SetPath(path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             _playListItemPersistence = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
+            GetListsFromRepository();
             AddItemCommand = new AddPlaylistCommand(this);
             RemovePlaylist = new RemovePlaylist(this);
         }
@@ -80,7 +81,18 @@ namespace UserPlaylistModule.ViewModels
         private ListItemViewModel _selectedPlaylist;
         public ListItemViewModel SelectedPlaylist
         {
-            get => _selectedPlaylist;
+            get
+            {
+                if(_selectedPlaylist == null)
+                {
+                    if(PlaylistCollection.Count == 0)
+                    {
+                        GetListsFromRepository();
+                    }
+                    _selectedPlaylist = PlaylistCollection.FirstOrDefault() ?? null;
+                }
+                return _selectedPlaylist;
+            }
             set => SetProperty(ref _selectedPlaylist, value);
         }
 
@@ -128,6 +140,7 @@ namespace UserPlaylistModule.ViewModels
             {
                 _playlistCollection.Add(new ListItemViewModel()
                 {
+                    Id = item.Id,
                     Name = item.Name,
                     Created = item.StartGeneration,
                     Description = item.Description,

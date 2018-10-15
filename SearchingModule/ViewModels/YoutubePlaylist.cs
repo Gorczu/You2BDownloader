@@ -20,11 +20,11 @@ namespace SearchingModule.ViewModels
 
         public override IList<YoutubeItem> GetAllElements()
         {
-            IList<YoutubeItem> result = GetPLItems();
-            return result;
+            var result =  GetPLItems();
+            return result.Result;
         }
 
-        private async IList<YoutubeItem> GetPLItems()
+        private async Task<IList<YoutubeItem>> GetPLItems()
         {
             IList<YoutubeItem> res = new List<YoutubeItem>();
             var query = HttpUtility.ParseQueryString(PLALIST_ITEMS_URL);
