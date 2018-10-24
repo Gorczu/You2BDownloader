@@ -19,12 +19,15 @@ namespace SearchingModule.BusinessLogic
             bool result = false;
             foreach (var item in element.GetAllElements())
             {
-                result |= _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
+                int id = -1;
+                id  = _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
                 {
                     NewName = item.Name,
                     Address = item.Source,
                     PlayListId = playListId
                 });
+
+                result |= id != -1;
             }
             return result;
         }

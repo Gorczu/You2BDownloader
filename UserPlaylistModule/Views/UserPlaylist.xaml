@@ -103,8 +103,9 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
             </GroupBox>
             
             <GroupBox Header="Items in selected playlist" Grid.Column="2" Margin="5">
-                <DataGrid Margin="3" ItemsSource="{Binding SelectedPlayListItemCollection}" AutoGenerateColumns="False" 
-                          RowHeaderWidth="0">
+                <DataGrid Margin="3" ItemsSource="{Binding SelectedPlayListItemCollection}"
+                          AutoGenerateColumns="False" RowHeaderWidth="0" CanUserAddRows="False"
+                          CanUserDeleteRows="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nr" Binding="{Binding Address}" Width="30"/>
                         <DataGridTextColumn Header="New Name" Binding="{Binding NewName}" Width="*"/>

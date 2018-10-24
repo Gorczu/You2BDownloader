@@ -14,6 +14,8 @@ namespace SearchingModule.ViewModels
 
         public abstract ITaskToDbInserter<YoutubeItem> GetInserter();
 
+        public string Id { get; set; }
+
         private string _name;
 
         private string _source;

@@ -12,11 +12,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
+using log4net;
 
 namespace UserPlaylistModule.Commands
 {
     public class AddPlaylistCommand : IAddItemCommand
     {
+        private static readonly ILog LOG = LogManager.GetLogger(typeof(AddPlaylistCommand));
         private IUserPlaylistViewModel _viewModel;
         private PlaylistRepository _listRepository;
 
@@ -62,10 +65,26 @@ namespace UserPlaylistModule.Commands
                 Image = ViewModel.CurrenItem.Image
             };
 
-            if(_listRepository.InsertItem(persistenceItem))
+            int id = -1;
+            try
+            {
+                id = _listRepository.InsertItem(persistenceItem);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(
+                    "There is in database Playlist with same name.",
+                    "Error", 
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                
+                LOG.Error(ex.StackTrace);
+            }
+
+            if(id != -1)
             {
                 this.ViewModel.PlaylistCollection.Add(ViewModel.CurrenItem);
-                ViewModel.CurrenItem.Id = _listRepository.GetItemByName(ViewModel.CurrenItem.Name).Id;
+                ViewModel.CurrenItem.Id = id;
                 this.ViewModel.CurrenItem = new ListItemViewModel();
             }
         }

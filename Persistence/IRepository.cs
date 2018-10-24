@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    interface IRepository<T>
+    interface IRepository<T, K>
     {
         IList<T> GetItems(int pageNo, int noPerPage, string orderParameterName);
         IList<T> GetItemsWhere(string value, string columnName);
-        T GetItem(int idx);
-        bool EditItem(int idx, T newValue);
-        bool DeleteItem(int idx);
-        bool InsertItem(T item);
+        T GetItem(K idx);
+        bool EditItem(K idx, T newValue);
+        bool DeleteItem(K idx);
+        K InsertItem(T item);
     }
 }

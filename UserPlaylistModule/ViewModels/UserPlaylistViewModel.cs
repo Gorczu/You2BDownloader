@@ -33,9 +33,14 @@ namespace UserPlaylistModule.ViewModels
             this.PathSelector.SetPath(path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             _playListItemPersistence = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
+            _playlistCollection.Clear();
             GetListsFromRepository();
             AddItemCommand = new AddPlaylistCommand(this);
             RemovePlaylist = new RemovePlaylist(this);
+            PlaylistCollection.CollectionChanged += (obj, args) =>
+            {
+                RaisePropertyChanged("SelectedPlaylist");
+            };
         }
 
         public IPathSelector PathSelector
@@ -83,13 +88,9 @@ namespace UserPlaylistModule.ViewModels
         {
             get
             {
-                if(_selectedPlaylist == null)
+                if(_selectedPlaylist == null && PlaylistCollection.Count != 0 )
                 {
-                    if(PlaylistCollection.Count == 0)
-                    {
-                        GetListsFromRepository();
-                    }
-                    _selectedPlaylist = PlaylistCollection.FirstOrDefault() ?? null;
+                    _selectedPlaylist = PlaylistCollection[0] ?? null;
                 }
                 return _selectedPlaylist;
             }
@@ -101,17 +102,20 @@ namespace UserPlaylistModule.ViewModels
             get
             {
                 return new DelegateCommand(() => {
-                    SelectedPlayListItemCollection.Clear();
-                    foreach (var item in _playListItemPersistence.GetItemsWhere(_selectedPlaylist.Id.ToString(),
-                        "PlayListId"))
+                    if (_selectedPlaylist != null)
                     {
-                        SelectedPlayListItemCollection.Add(new SingleItemViewModel()
+                        SelectedPlayListItemCollection.Clear();
+                        foreach (var item in _playListItemPersistence.GetItemsWhere(_selectedPlaylist.Id.ToString(),
+                            "PlayListId"))
                         {
-                            NewName = item.NewName,
-                            Address = item.Address,
-                            Description = item.Description,
-                            PlayListId= item.PlayListId
-                        });
+                            SelectedPlayListItemCollection.Add(new SingleItemViewModel()
+                            {
+                                NewName = item.NewName,
+                                Address = item.Address,
+                                Description = item.Description,
+                                PlayListId = item.PlayListId
+                            });
+                        }
                     }
                 });
             }
@@ -119,7 +123,11 @@ namespace UserPlaylistModule.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            GetListsFromRepository();
+            lock (obj)
+            {
+                PlaylistCollection.Clear();
+                GetListsFromRepository();
+            }
             return true;
         }
 
@@ -130,25 +138,31 @@ namespace UserPlaylistModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            GetListsFromRepository();
+            lock (obj)
+            {
+                PlaylistCollection.Clear();
+                GetListsFromRepository();
+            }
         }
 
+        private static object obj = new object();
         private void GetListsFromRepository()
         {
-            _playlistCollection.Clear();
-            foreach (var item in _playListPersistence.GetItems(1, 10, "Name"))
+            lock (obj)
             {
-                _playlistCollection.Add(new ListItemViewModel()
+                foreach (var item in _playListPersistence.GetItems(1, 10, "Name"))
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Created = item.StartGeneration,
-                    Description = item.Description,
-                    Gerne = item.Gerne,
-                    Path = item.FolderPath
-                });
+                    PlaylistCollection.Add(new ListItemViewModel()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Created = item.StartGeneration,
+                        Description = item.Description,
+                        Gerne = item.Gerne,
+                        Path = item.FolderPath
+                    });
+                }
             }
-            RaisePropertyChanged("PlaylistCollection");
             
         }
     }

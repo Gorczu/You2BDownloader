@@ -5,13 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SearchingModule.Views"
              mc:Ignorable="d" 
-             Height="155" Width="125" Background="Yellow">
-    <Grid >
+             Height="155" Width="125">
+    <Grid DragEnter="Item_Drag" MouseMove="OnMove" >
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="{Binding ImgSrc}" />
+        <TextBlock HorizontalAlignment="Center" Margin="5" FontSize="20" FontWeight="ExtraBold" Foreground="#ff9933"
+                   Opacity="0.5">
+            Playlist
+        </TextBlock>
+        <Image Grid.Row="0" Source="{Binding ImgSrc}" RenderTransformOrigin="0.561,0.509" >
+            
+        </Image>
         <Label Grid.Row="1" >
             <TextBlock Text="{Binding Name}" TextWrapping="WrapWithOverflow" FontSize="9" FontStretch="Medium">
             </TextBlock>

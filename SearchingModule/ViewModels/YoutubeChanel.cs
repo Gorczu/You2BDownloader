@@ -11,6 +11,7 @@ namespace SearchingModule.ViewModels
     public class YoutubeChanel : YoutubeItem, IContainerForYTubeItems
     {
         public IList<YoutubeMovie> YoutubeMovies { get; set; }
+        public string ChanelId { get; internal set; }
 
         public override IList<YoutubeItem> GetAllElements()
         {

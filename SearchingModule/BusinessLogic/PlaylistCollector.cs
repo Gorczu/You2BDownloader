@@ -1,4 +1,5 @@
-﻿using Google.Apis.Services;
+﻿using CommonControls.Helpers;
+using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using SearchingModule.ViewModels;
 using System;
@@ -44,8 +45,8 @@ namespace SearchingModule.BusinessLogic
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyD0PZiNzYdahSXU3QSN3YgiVsB45w5MQWA",
-                ApplicationName = "second-flame-190610"
+                ApiKey = YouTubeAPIServiceHelper.API_KEY,
+                ApplicationName = YouTubeAPIServiceHelper.APP_NAME
             });
 
             var searchListRequest = youtubeService.Search.List("snippet");
@@ -77,6 +78,7 @@ namespace SearchingModule.BusinessLogic
                         
                         results.Add(new YoutubeChanel()
                         {
+                            ChanelId = searchResult.Id.ChannelId,
                             Name = searchResult.Snippet.ChannelTitle,
                             ImgSrc = searchResult.Snippet.Thumbnails.Default__.Url,
                             Source = string.Format(baseURI, searchResult.Snippet.ChannelId)
@@ -87,8 +89,9 @@ namespace SearchingModule.BusinessLogic
 
                         results.Add(new YoutubePlaylist()
                         {
+                            PlaylistId = searchResult.Id.PlaylistId,
                             Name = searchResult.Snippet.ChannelTitle,
-                            ImgSrc = searchResult.Snippet.Thumbnails.Default__.Url,
+                            ImgSrc = searchResult.Snippet.Thumbnails?.Default__?.Url,
                             Source = string.Format(baseURI, searchResult.Snippet.Title)
                         });
                         break;

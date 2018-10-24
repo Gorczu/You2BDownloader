@@ -16,7 +16,7 @@ namespace SearchingModule.BusinessLogic
 
         public bool InsertAllElements(T element, int playListId)
         {
-            bool result = _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
+            bool result = -1 != _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
             {
                 NewName = element.Name,
                 Address = element.Source,

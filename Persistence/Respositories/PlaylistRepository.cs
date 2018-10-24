@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Persistence.Respositories
 {
-    public class PlaylistRepository : IRepository<PlayList>
+    public class PlaylistRepository : IRepository<PlayList, int>
     {
         private IDbConnection _sqlConnection;
 
@@ -26,21 +26,31 @@ namespace Persistence.Respositories
 
         public bool EditItem(int idx, PlayList newValue)
         {
-            int result = _sqlConnection.Execute(" UPDATE PlayList " +
-                                                $"SET FolderPath='{newValue.FolderPath}', " +
-                                                $"SET Description='{newValue.Description}', " +
-                                                $"SET Name='{newValue.Name}', " +
-                                                $"SET Gerne='{newValue.Gerne}' " +
-                                                $"SET StartGeneration='{newValue.StartGeneration}' " +
-                                                $"SET Image='{newValue.Image}' " +
-                                                $"WHERE Id = {newValue.Id}; ");
+            int result = _sqlConnection.Execute(
+                " UPDATE PlayList " +
+                " SET FolderPath=@FolderPath, " +
+                " SET Description=@Description, " +
+                " SET Name=@Name, " +
+                " SET Gerne=@Gerne " +
+                " SET StartGeneration=@StartGeneration " +
+                " SET Image=@Image " +
+                " WHERE Id = @Id; ",
+                new {
+                    newValue.FolderPath,
+                    newValue.Description,
+                    newValue.Name,
+                    newValue.Gerne,
+                    newValue.StartGeneration,
+                    newValue.Image,
+                    newValue.Id
+                });
             return result != 0;
         }
 
         public PlayList GetItem(int idx)
         {
             var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
-                                                       $"WHERE Id={idx}");
+                                                        "WHERE Id=@idx", idx);
 
             return result.FirstOrDefault() ?? null;
         }
@@ -48,34 +58,52 @@ namespace Persistence.Respositories
         public PlayList GetItemByName(string name)
         {
             var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
-                                                       $"WHERE Name='{name}'");
+                                                        "WHERE Name=@name", name);
 
             return result.FirstOrDefault() ?? null;
         }
 
         public IList<PlayList> GetItems(int pageNo, int noPerPage, string orderParameterName)
         {
-            var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
-                                                       $"ORDER BY {orderParameterName} " +
-                                                       $"LIMIT {noPerPage} OFFSET {(pageNo - 1) * noPerPage}");
+            var result = _sqlConnection.Query<PlayList>(
+                "SELECT * FROM PlayList " +
+                "ORDER BY @OrderParameterName " +
+                "LIMIT @NoPerPage OFFSET @PageNo; ",
+              new
+              {
+                  OrderParameterName = orderParameterName,
+                  NoPerPage = noPerPage,
+                  PageNo = (pageNo - 1) * noPerPage
+              });
 
             return result.ToArray();
         }
 
         public IList<PlayList> GetItemsWhere(string value, string columnName)
         {
-            var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayListItem " +
-                                                       $"WHERE {columnName}={value}");
+            var result = _sqlConnection.Query<PlayList>(
+                "SELECT * FROM PlayListItem " +
+                "WHERE @columnName=@value",
+               new { columnName, value});
 
             return result.ToArray();
         }
 
-        public bool InsertItem(PlayList item)
+        public int InsertItem(PlayList item)
         {
-            int result = _sqlConnection.Execute($"INSERT INTO PlayList(Description, FolderPath, Gerne, Name, Image) " +
-                                                $"VALUES ('{item.Description}', '{item.FolderPath}', '{item.Gerne}', " +
-                                                $" '{item.Name}', '{item.Image}')");
-            return result != 0;
+            int result = _sqlConnection.QuerySingle<int>(
+            "INSERT INTO PlayList(Description, FolderPath, Gerne, Name, Image) " +
+            "VALUES (@Description, @FolderPath, @Gerne, @Name, @Image); " +
+            "SELECT last_insert_rowid(); ",
+            new
+            {
+                item.Description,
+                item.FolderPath,
+                item.Gerne,
+                item.Name,
+                item.Image
+            });
+            return result;
         }
     }
 }

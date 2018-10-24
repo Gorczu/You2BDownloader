@@ -3,6 +3,7 @@ using Persistence.Respositories;
 using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +15,20 @@ namespace SearchingModule.BusinessLogic
         private static PlaylistItemRepository _playlistItemRepository 
             = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
 
+        private static PlaylistRepository _playlistRepository
+            = new PlaylistRepository(SqlConnector.GetDefaultConnection());
+
         public bool InsertAllElements(T element,int playListId)
         {
             bool result = false;
-            foreach(var item in element.GetAllElements())
+            var pl = _playlistRepository.GetItem(playListId);
+
+            foreach (var item in element.GetAllElements())
             {
-                result |= _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
+                _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
                 {
                     NewName = item.Name,
-                    Address = item.Source
+                    Address = Path.Combine(pl.FolderPath, item.Name),
                 });
             }
             return result;
