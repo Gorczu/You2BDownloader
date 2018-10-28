@@ -14,21 +14,18 @@ namespace SearchingModule.BusinessLogic
     {
         private static PlaylistItemRepository _playlistItemRepository 
             = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
-
-        private static PlaylistRepository _playlistRepository
-            = new PlaylistRepository(SqlConnector.GetDefaultConnection());
-
+     
         public bool InsertAllElements(T element,int playListId)
         {
             bool result = false;
-            var pl = _playlistRepository.GetItem(playListId);
-
             foreach (var item in element.GetAllElements())
             {
                 _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
                 {
                     NewName = item.Name,
-                    Address = Path.Combine(pl.FolderPath, item.Name),
+                    Address = item.Source,
+                    PlayListId = playListId,
+
                 });
             }
             return result;

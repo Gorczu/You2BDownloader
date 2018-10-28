@@ -50,7 +50,7 @@ namespace Persistence.Respositories
         public PlayList GetItem(int idx)
         {
             var result = _sqlConnection.Query<PlayList>("SELECT * FROM PlayList " +
-                                                        "WHERE Id=@idx", idx);
+                                                       $"WHERE Id={idx}");
 
             return result.FirstOrDefault() ?? null;
         }

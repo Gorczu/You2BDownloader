@@ -9,6 +9,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="85"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="5">
             <StackPanel.Resources>
@@ -49,5 +50,11 @@
         <Grid Grid.Row="1" Margin="5">
             <ContentControl prism:RegionManager.RegionName="ContentRegion" />
         </Grid>
+        <Border Grid.Row="2" Height="30" BorderBrush="LightGray" BorderThickness="1" Margin="8 5 8 5" >
+            <StackPanel  Orientation="Horizontal" >
+                <ProgressBar Height="15" Width="200" Value="{Binding ProgressValue}" Margin="5 5 5 5"/>
+                <Label Width="Auto" Content="{Binding ProgressText}" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

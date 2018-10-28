@@ -105,9 +105,12 @@ namespace SearchingModule.ViewModels
                 {
                     if(obj.ObjectToInsert!= null)
                     {
-                        YoutubeItem youTubeItem = (YoutubeItem)obj.ObjectToInsert;
-                        var inserter = youTubeItem.GetInserter();
-                        bool inserted = inserter.InsertAllElements(youTubeItem, obj.Id);
+                       Task.Run(() =>
+                       {
+                           YoutubeItem youTubeItem = (YoutubeItem)obj.ObjectToInsert;
+                           var inserter = youTubeItem.GetInserter();
+                           bool inserted = inserter.InsertAllElements(youTubeItem, obj.Id);
+                       });
                     }
                 });
             }

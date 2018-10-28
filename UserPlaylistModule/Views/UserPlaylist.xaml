@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="230" MaxHeight="300"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid>

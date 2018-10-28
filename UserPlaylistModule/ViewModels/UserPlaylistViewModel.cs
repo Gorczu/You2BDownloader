@@ -37,10 +37,7 @@ namespace UserPlaylistModule.ViewModels
             GetListsFromRepository();
             AddItemCommand = new AddPlaylistCommand(this);
             RemovePlaylist = new RemovePlaylist(this);
-            PlaylistCollection.CollectionChanged += (obj, args) =>
-            {
-                RaisePropertyChanged("SelectedPlaylist");
-            };
+            
         }
 
         public IPathSelector PathSelector
@@ -105,8 +102,7 @@ namespace UserPlaylistModule.ViewModels
                     if (_selectedPlaylist != null)
                     {
                         SelectedPlayListItemCollection.Clear();
-                        foreach (var item in _playListItemPersistence.GetItemsWhere(_selectedPlaylist.Id.ToString(),
-                            "PlayListId"))
+                        foreach (var item in _playListItemPersistence.GetItemsFromPlayList(_selectedPlaylist.Id))
                         {
                             SelectedPlayListItemCollection.Add(new SingleItemViewModel()
                             {
@@ -116,6 +112,10 @@ namespace UserPlaylistModule.ViewModels
                                 PlayListId = item.PlayListId
                             });
                         }
+                    }
+                    else
+                    {
+
                     }
                 });
             }

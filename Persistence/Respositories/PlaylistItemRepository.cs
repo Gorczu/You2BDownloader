@@ -20,7 +20,7 @@ namespace Persistence.Respositories
 
         public bool DeleteItem(int idx)
         {
-            int result = _sqlConnection.Execute("DELETE FROM PlayListItem WHERE Id=@idx", idx);
+            int result = _sqlConnection.Execute("DELETE FROM PlayListItem WHERE Id=@idx;", idx);
             return result != 0;
         }
 
@@ -46,7 +46,7 @@ namespace Persistence.Respositories
         public PlaylistItem GetItem(int idx)
         {
             var result = _sqlConnection.Query<PlaylistItem>("SELECT * FROM PlayListItem " +
-                                                            "WHERE Id=@idx", idx);
+                                                            "WHERE Id=@idx;", idx);
 
             return result.FirstOrDefault() ?? null;
         }
@@ -67,18 +67,20 @@ namespace Persistence.Respositories
             return result.ToArray();
         }
 
-        public IList<PlaylistItem> GetItemsWhere(string value, string columnName)
+        public IList<PlaylistItem> GetItemsFromPlayList(int playListId)
         {
             
             var result = _sqlConnection.Query<PlaylistItem>(
                 "SELECT * FROM PlayListItem " +
-                " WHERE @columnName=@value",
-                new {
-                    columnName,
-                    value
-                });
+                "WHERE PlayListId=@PlayListId;",
+                new { PlayListId = playListId } );
 
             return result.ToArray();
+        }
+
+        public IList<PlaylistItem> GetItemsWhere(string value, string columnName)
+        {
+            throw new NotImplementedException();
         }
 
         public int InsertItem(PlaylistItem item)
