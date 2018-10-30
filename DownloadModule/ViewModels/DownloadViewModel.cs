@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,37 @@ using System.Threading.Tasks;
 
 namespace DownloadModule.ViewModels
 {
-    public class DownloadViewModel : BindableBase
+    public class DownloadViewModel : BindableBase, INavigationAware
     {
-        private string _message;
-        public string Message
+
+        private IList<PlaylistVM> playlists;
+        public IList<PlaylistVM> Playlists
         {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
+            get { return playlists; }
+            set { SetProperty(ref playlists, value); }
         }
 
-        public DownloadViewModel()
+        public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            Message = "Download Module";
+            LoadData();
+            return true;
         }
+
+        
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            //from db
+        }
+
     }
 }

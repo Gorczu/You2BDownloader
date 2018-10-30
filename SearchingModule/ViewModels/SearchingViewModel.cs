@@ -11,6 +11,10 @@ using Prism.Regions;
 using Persistence.Respositories;
 using Persistence;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.Collections.Concurrent;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace SearchingModule.ViewModels
 {
@@ -19,6 +23,7 @@ namespace SearchingModule.ViewModels
         public SearchingViewModel(IPlaylistCollector searchCommand)
         {
             this.SearchCommand = searchCommand;
+            _dispatcher = Dispatcher.FromThread(Thread.CurrentThread);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             _playlistItemRepository = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
   
@@ -26,6 +31,12 @@ namespace SearchingModule.ViewModels
 
         private string _searchText;
         private IPlaylistCollector _searchCommand;
+
+        internal void UpdateCollection()
+        {
+            _dispatcher.Invoke(() => OnPropertyChanged("Result"));
+        }
+
         private PlaylistRepository _playListPersistence;
         private PlaylistItemRepository _playlistItemRepository;
 
@@ -41,7 +52,8 @@ namespace SearchingModule.ViewModels
             set => _searchCommand = value;
         }
 
-        private IList<YoutubeItem> _result;
+        private Dispatcher _dispatcher;
+        private IList<YoutubeItem> _result = new List<YoutubeItem>();
         public IList<YoutubeItem> Result
         {
             get => _result;

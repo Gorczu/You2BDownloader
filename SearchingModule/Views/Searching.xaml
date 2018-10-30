@@ -31,7 +31,9 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBox x:Name="SearchTxt" Text="{Binding SearchText}" />
-            <Button Content="Search" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}" IsDefault="True"/>
+            <Button  Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTxt, Path=DataContext}" IsDefault="True" Margin="-6,5,5,5" Width="40">
+                <Image Source="..\..\CommonControls\ResourcesCommonControls\magnifier.png"/>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <ListView Margin="5" ItemsSource="{Binding UserPlaylist}">

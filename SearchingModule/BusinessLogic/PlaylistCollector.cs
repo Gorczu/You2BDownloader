@@ -17,9 +17,7 @@ namespace SearchingModule.BusinessLogic
         public bool CanExecute(object parameter) => true;
 
         List<YoutubeItem> _result = new List<YoutubeItem>();
-        private List<YoutubeItem> results;
-        private List<YoutubeItem> channels;
-        private List<YoutubeItem> playlists;
+        private SearchingViewModel vm;
 
         public PlaylistCollector()
         {
@@ -28,21 +26,18 @@ namespace SearchingModule.BusinessLogic
         public void Execute(object parameter)
         {
             var vm = (SearchingViewModel)parameter;
-            this._pattern = vm.SearchText;
-            Run();
-            vm.Result = results;
+            Task.Run(() =>
+            {
+                this.vm = vm;
+                this._pattern = vm.SearchText;
+                this.vm.Result = this.Run();
+                this.vm.UpdateCollection();
+            });
         }
 
-
-        public IList<YoutubeItem> GetCollection(string pattern)
+        private List<YoutubeItem> Run()
         {
-            this._pattern = pattern;
-            Run();
-            return _result;
-        }
-
-        private void Run()
-        {
+            List<YoutubeItem> result = new List<YoutubeItem>();
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
                 ApiKey = YouTubeAPIServiceHelper.API_KEY,
@@ -51,22 +46,25 @@ namespace SearchingModule.BusinessLogic
 
             var searchListRequest = youtubeService.Search.List("snippet");
             searchListRequest.Q = _pattern; // Replace with your search term.
-            searchListRequest.MaxResults = 10;
+            searchListRequest.MaxResults = 25;
 
             // Call the search.list method to retrieve results matching the specified query term.
             var searchListResponse = searchListRequest.Execute();
-
-            this.results = new List<YoutubeItem>();
             string baseURI = @"https://www.youtube.com/watch?v={0}";
 
             // Add each result to the appropriate list, and then display the lists of
             // matching videos, channels, and playlists.
+            ProgressHelper.SetProgress("Getting data from Youtube API", 0);
+            int idx = 0;
             foreach (var searchResult in searchListResponse.Items)
             {
+                double percent = ((double)idx / (double)searchListRequest.MaxResults) * 100.0;
+                ProgressHelper.SetProgress($"Getting data {++idx} of {searchListRequest.MaxResults}", (int)percent);
+
                 switch (searchResult.Id.Kind)
                 {
                     case "youtube#video":
-                        results.Add(new YoutubeMovie()
+                        result.Add(new YoutubeMovie()
                         {
                             Name = searchResult.Snippet.Title,
                             ImgSrc = searchResult.Snippet.Thumbnails.Default__.Url,
@@ -75,8 +73,8 @@ namespace SearchingModule.BusinessLogic
                         break;
 
                     case "youtube#channel":
-                        
-                        results.Add(new YoutubeChanel()
+
+                        result.Add(new YoutubeChanel()
                         {
                             ChanelId = searchResult.Id.ChannelId,
                             Name = searchResult.Snippet.ChannelTitle,
@@ -87,7 +85,7 @@ namespace SearchingModule.BusinessLogic
 
                     case "youtube#playlist":
 
-                        results.Add(new YoutubePlaylist()
+                        result.Add(new YoutubePlaylist()
                         {
                             PlaylistId = searchResult.Id.PlaylistId,
                             Name = searchResult.Snippet.ChannelTitle,
@@ -96,7 +94,11 @@ namespace SearchingModule.BusinessLogic
                         });
                         break;
                 }
+
+
             }
+            ProgressHelper.SetProgress($"Finished.", 0);
+            return result;
         }
     }
 }

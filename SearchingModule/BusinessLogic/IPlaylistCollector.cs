@@ -10,6 +10,5 @@ namespace SearchingModule.BusinessLogic
 {
     public interface IPlaylistCollector : ICommand
     {
-        IList<YoutubeItem> GetCollection(string pattern);
     }
 }

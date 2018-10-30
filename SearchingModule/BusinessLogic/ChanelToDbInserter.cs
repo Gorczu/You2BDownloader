@@ -23,9 +23,8 @@ namespace SearchingModule.BusinessLogic
                 _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
                 {
                     NewName = item.Name,
-                    Address = item.Source,
+                    Address = item.Id,
                     PlayListId = playListId,
-
                 });
             }
             return result;

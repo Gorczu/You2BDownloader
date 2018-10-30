@@ -31,9 +31,8 @@ namespace SearchingModule.BusinessLogic
                 id  = _playlistItemRepository.InsertItem(new Persistence.Models.PlaylistItem()
                 {
                     NewName = item.Name,
-                    Address = item.Source,
+                    Address = item.Id,
                     PlayListId = playListId,
-                    
                 });
 
                 result |= id != -1;

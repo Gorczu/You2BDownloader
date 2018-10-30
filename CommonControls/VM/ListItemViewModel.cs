@@ -1,4 +1,6 @@
 ﻿using CommonControls.Validation;
+using Persistence;
+using Persistence.Respositories;
 using Prism.Mvvm;
 using Prism.Validation;
 using System;
@@ -10,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace CommonControls.VM
 {
@@ -17,6 +21,7 @@ namespace CommonControls.VM
     {
         public ListItemViewModel()
         {
+            _playListItemPersistence = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
             this.PropertyChanged += (a, b) => this.ValidateProperties();
         }
 
@@ -27,7 +32,8 @@ namespace CommonControls.VM
         private string _description;
         private string _path;
         private byte[] _image = File.ReadAllBytes("ResourcesCommonControls/stormtrooper.png");
-        private Object _objectToInsert; 
+        private Object _objectToInsert;
+        private PlaylistItemRepository _playListItemPersistence;
 
         public int Id
         {
@@ -115,6 +121,18 @@ namespace CommonControls.VM
         {
             get => _objectToInsert;
             set => _objectToInsert = value;
+        }
+        
+        public bool CanExecuteUpdateTextBoxBindingOnEnterCommand(object parameter)
+        {
+            return true;
+        }
+
+        public void ExecuteUpdateTextBoxBindingOnEnterCommand(object parameter)
+        {
+            var per = _playListItemPersistence.GetItem(Id);
+            per.Description = this.Description;
+            _playListItemPersistence.EditItem(Id, per);
         }
     }
 }

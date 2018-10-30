@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="DownloadModule.Views.SinglePlaylistTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DownloadModule.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="600">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Panel.ZIndex="1">
+                <Button Height="20" Width="20" Margin="2" Panel.ZIndex="2" Command="{Binding Download}" >
+                    <Image Source="..\..\CommonControls\ResourcesCommonControls\save.png"/>
+                </Button>
+                <Label Content="{Binding Name}" />
+                <Label Content="{Binding Percent}" />
+            </StackPanel>
+            <ProgressBar Height="30" Margin="0, -26, 0 , 0" Panel.ZIndex="0"/>
+            <Expander >
+                <ListView>
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <local:SingleMovieTemplate/>
+                        </ControlTemplate>
+                    </ListView.Template>
+                </ListView>
+            </Expander>
+        </StackPanel>
+    </Grid>
+</UserControl>

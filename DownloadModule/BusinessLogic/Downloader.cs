@@ -43,14 +43,8 @@ namespace DownloadModule.BusinessLogic
                         //Write the downloaded data
                         memStream.Write(buffer, 0, bytesRead);
 
-                        /*Update the progress bar 
-                        if (progressBar1.Value + bytesRead <= progressBar1.Maximum)
-                        {
-                            progressBar1.Value += bytesRead;
-                            lbProgress.Text = progressBar1.Value.ToString() + "/" + dataLength.ToString();
-                            progressBar1.Refresh();
-                        }
-                        */
+                        //Update the progress bar 
+                        
                     }
                 }
 

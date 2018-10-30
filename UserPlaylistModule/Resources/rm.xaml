@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is NOT compatible with Silverlight-->
+<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+  <Canvas Name="Layer_1" Width="64" Height="64">
+    <Canvas.RenderTransform>
+      <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas.Resources/>
+    <!--Unknown tag: metadata-->
+    <!--Unknown tag: sodipodi:namedview-->
+    <Canvas Name="g3736">
+      <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="64" Height="64" Name="rect3732" Fill="#FF27A2DB"/>
+      <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Top="56" Width="64" Height="8" Name="rect3734" Fill="#FF2D93BA"/>
+    </Canvas>
+    <Canvas Name="g3742">
+      <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3738" Fill="#FFFFFFFF">
+        <Path.Data>
+          <PathGeometry Figures="M43.7 18.2h-5.4v-2.9c0-0.4-0.3-0.7-0.7-0.7H26.5c-0.4 0-0.7 0.3-0.7 0.7v2.9h-5.4c-1 0-1.8 0.8-1.8 1.8   v3.8h27V20C45.5 19 44.7 18.2 43.7 18.2z M36.7 18.2h-9.4V16h9.4V18.2z" FillRule="NonZero"/>
+        </Path.Data>
+      </Path>
+      <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3740" Fill="#FFFFFFFF">
+        <Path.Data>
+          <PathGeometry Figures="M22.2 49.5h19.6l1.7-24.2h-23L22.2 49.5z M36.2 30.8c0-0.4 0.3-0.7 0.7-0.7s0.7 0.3 0.7 0.7V44   c0 0.4-0.3 0.7-0.7 0.7s-0.7-0.3-0.7-0.7V30.8z M31.3 30.8c0-0.4 0.3-0.7 0.7-0.7s0.7 0.3 0.7 0.7V44c0 0.4-0.3 0.7-0.7 0.7   s-0.7-0.3-0.7-0.7V30.8z M26.3 30.8c0-0.4 0.3-0.7 0.7-0.7c0.4 0 0.7 0.3 0.7 0.7V44c0 0.4-0.3 0.7-0.7 0.7c-0.4 0-0.7-0.3-0.7-0.7   V30.8z" FillRule="NonZero"/>
+        </Path.Data>
+      </Path>
+    </Canvas>
+  </Canvas>
+</Viewbox>
