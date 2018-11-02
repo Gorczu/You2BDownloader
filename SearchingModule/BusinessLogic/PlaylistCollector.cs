@@ -1,10 +1,13 @@
 ﻿using CommonControls.Helpers;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
+using Google.Apis.YouTube.v3.Data;
 using SearchingModule.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,14 +52,35 @@ namespace SearchingModule.BusinessLogic
             searchListRequest.MaxResults = 25;
 
             // Call the search.list method to retrieve results matching the specified query term.
-            var searchListResponse = searchListRequest.Execute();
-            string baseURI = @"https://www.youtube.com/watch?v={0}";
+            String obj = null;
+            //SearchListResponse searchListResponse = searchListRequest.Execute();
+            ProgressHelper.SetProgress("Getting data from Youtube API", 0);
+            using (var stream = searchListRequest.ExecuteAsStream())
+            {
+                using (MemoryStream writeStream = new MemoryStream())
+                {
+                    byte[] buffer = new byte[256];
+                    int readed = 0;
+                    int index = 0;
+                    while ((readed = stream.Read(buffer, 0, buffer.Length)) != 0)
+                    {
+                        writeStream.Write(buffer, 0, readed);
 
+                        double percent = (double)index / (double)stream.Length * 100.0;
+                        ProgressHelper.SetProgress($"Loading data {percent.ToString("0.00")}%", (int)percent);
+                    }
+                    
+                    obj = Encoding.Default.GetString(writeStream.ToArray());
+                }
+            }
+            
+            SearchListResponse returnedItems = Newtonsoft.Json.JsonConvert.DeserializeObject<SearchListResponse>(obj);
+            string baseURI = @"https://www.youtube.com/watch?v={0}";
             // Add each result to the appropriate list, and then display the lists of
             // matching videos, channels, and playlists.
-            ProgressHelper.SetProgress("Getting data from Youtube API", 0);
+
             int idx = 0;
-            foreach (var searchResult in searchListResponse.Items)
+            foreach (var searchResult in returnedItems.Items)
             {
                 double percent = ((double)idx / (double)searchListRequest.MaxResults) * 100.0;
                 ProgressHelper.SetProgress($"Getting data {++idx} of {searchListRequest.MaxResults}", (int)percent);
@@ -94,8 +118,6 @@ namespace SearchingModule.BusinessLogic
                         });
                         break;
                 }
-
-
             }
             ProgressHelper.SetProgress($"Finished.", 0);
             return result;

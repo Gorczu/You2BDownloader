@@ -119,14 +119,6 @@
       <Name>Persistence</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ResourcesCommonControls\save.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ResourcesCommonControls\magnifier.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>xcopy $(ProjectDir)ResourcesCommonControls $(SolutionDir)\YouToubeDownloader\bin\$(ConfigurationName)\ResourcesCommonControls /I /Y</PreBuildEvent>
