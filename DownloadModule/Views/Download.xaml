@@ -7,15 +7,57 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:vm="clr-namespace:DownloadModule.ViewModels"
+             xmlns:commVM="clr-namespace:CommonControls.VM;assembly=CommonControls"
              prism:ViewModelLocator.AutoWireViewModel="True" 
              >
     <Grid>
-        <ListView ItemsSource="{Binding Playlists}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TreeView Name="trvFamilies" ItemsSource="{Binding Playlists}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type vm:PlaylistVM}" ItemsSource="{Binding Videos}">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Height="20" Width="20" Margin="2" Panel.ZIndex="2" Command="{Binding Download}" >
+                            <Image Source="/DownloadModule;component/Images/save.png"/>
+                        </Button>
+                        <TextBlock >
+                            <Run Text="Playlist name: " />                   
+                            <Run Text="{Binding Name}"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Downloaded:"/>
+                            <Run Text="{Binding Percent}"/>
+                            <Run Text="%"/>
+                        </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type commVM:SingleItemViewModel}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                             <Run Text="Title: "/>
+                             <Run Text="{Binding NewName}"/>
+                        </TextBlock>
+                        <TextBlock >
+                             <Run Text="Downloaded: "/>
+                             <Run Text="{Binding PercentDownloaded}"/>
+                        </TextBlock>
+                        <ProgressBar Height="22" Width="55" Value="25" />
+                    </StackPanel>
+                </DataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+
+        <!--
+        <ListView ItemsSource="{Binding Playlists}"  PreviewMouseWheel="OnWheel">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <local:SinglePlaylistTemplate/>
+                    <local:SinglePlaylistTemplate />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        -->
     </Grid>
 </UserControl>

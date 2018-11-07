@@ -24,5 +24,15 @@ namespace DownloadModule.Views
         {
             InitializeComponent();
         }
+
+        private void OnWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scv = sender as ScrollViewer;
+            if(null != scv)
+            {
+                scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+                e.Handled = true;
+            }
+        }
     }
 }

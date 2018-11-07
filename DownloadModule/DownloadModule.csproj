@@ -88,12 +88,6 @@
     <Compile Include="Views\Download.xaml.cs">
       <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SingleMovieTemplate.xaml.cs">
-      <DependentUpon>SingleMovieTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SinglePlaylistTemplate.xaml.cs">
-      <DependentUpon>SinglePlaylistTemplate.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -116,14 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Download.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SingleMovieTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SinglePlaylistTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -94,6 +94,19 @@ namespace UserPlaylistModule.ViewModels
             set => SetProperty(ref _selectedPlaylist, value);
         }
 
+        public ICommand RemoveItem
+        {
+            get
+            {
+                return new DelegateCommand<object>(RemoveItemExecute);
+            }
+        }
+
+        private void RemoveItemExecute(object obj)
+        {
+            SelectedPlayListItemCollection.Remove((SingleItemViewModel)obj);
+        }
+
         public DelegateCommand SelectedPlaylistChanged
         {
             get
