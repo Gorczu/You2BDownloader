@@ -53,28 +53,39 @@ namespace DownloadModule.ViewModels
             //load from db
             foreach (var playList in _playListPersistence.GetItems(1, 20, "Name"))
             {
-                IList<SingleItemViewModel> videos = new List<SingleItemViewModel>();
-                foreach (var playListItem in _playlistItemRepository.GetItemsFromPlayList(playList.Id))
+                var existing = Playlists.FirstOrDefault(o => o.Name == playList.Name);
+                
+                PlaylistVM playListVM = null;
+                if (existing != null)
                 {
-                    videos.Add(new SingleItemViewModel()
+                    playListVM = existing;
+                }
+                else
+                {
+                    playListVM = new PlaylistVM()
                     {
-                        NewName = playListItem.NewName,
-                        Address = playListItem.Address,
-                        Description= playListItem.Description
-                    });
+                        Name = playList.Name,
+                        Description = playList.Description,
+                        FolderPath = playList.FolderPath,
+                        Videos = new List<SingleItemViewModel>(),
+                    };
+                    Playlists.Add(playListVM);
                 }
 
-                var playListVM = new PlaylistVM()
+                foreach (var playListItem in _playlistItemRepository.GetItemsFromPlayList(playList.Id))
                 {
-                    Name = playList.Name,
-                    Description = playList.Description,
-                    FolderPath = playList.FolderPath,
-                    Videos = videos
-                };
-
-                Playlists.Add(playListVM);
+                    SingleItemViewModel existingMovieVM = playListVM.Videos.FirstOrDefault(e => e.NewName == playListItem.NewName);
+                    if (existingMovieVM == null)
+                    {
+                        playListVM.Videos.Add(new SingleItemViewModel()
+                        {
+                            NewName = playListItem.NewName,
+                            Address = playListItem.Address,
+                            Description = playListItem.Description
+                        });
+                    }
+                }
             }
         }
-
     }
 }

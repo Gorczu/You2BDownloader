@@ -46,7 +46,7 @@
                         <TextBlock Panel.ZIndex="0" Opacity="0.5" Grid.Column="1">
                              <Run Text="{Binding PercentDownloaded}"/>
                         </TextBlock>
-                        <ProgressBar Grid.Column="1" Height="15" Width="95" Value="25" Margin="-45,2,2,2" Panel.ZIndex="1" Opacity="0.5"/>
+                        <ProgressBar Grid.Column="1" Height="15" Width="95" Value="{Binding PercentDownloaded}" Margin="-45,2,2,2" Panel.ZIndex="1" Opacity="0.5"/>
                     </Grid>
                 </DataTemplate>
             </TreeView.Resources>
