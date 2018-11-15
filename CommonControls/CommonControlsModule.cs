@@ -4,6 +4,8 @@ using Prism.Regions;
 using System;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
+using CommonControls.Download;
+using CommonControls.VM;
 
 namespace CommonControls
 {
@@ -20,6 +22,8 @@ namespace CommonControls
 
         public void Initialize()
         {
+            _container.RegisterType<IDownloader, Downloader>();
+            _container.Resolve<SingleItemViewModel>();
             //_container.RegisterTypeForNavigation<ViewA>();
         }
     }

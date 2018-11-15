@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DownloadModule.ViewModels
 {
@@ -47,6 +48,8 @@ namespace DownloadModule.ViewModels
         {
             LoadData();
         }
+
+       
 
         private void LoadData()
         {

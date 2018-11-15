@@ -23,12 +23,13 @@
                         <Button Height="20" Width="20" Margin="2" Panel.ZIndex="2" Command="{Binding Download}" >
                             <Image Source="/DownloadModule;component/Images/save.png"/>
                         </Button>
-                        <TextBlock >
+                        <TextBlock Margin="3">
                             <Run Text="Playlist name: " />                   
                             <Run Text="{Binding Name}"/>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run Text="Downloaded:"/>
+                            <Run Text="     "/>
+                        </TextBlock >
+                        <TextBlock  Margin="3">
+                            <Run Text="Downloaded: "/>
                             <Run Text="{Binding Percent}"/>
                             <Run Text="%"/>
                         </TextBlock>
@@ -37,16 +38,17 @@
                 <DataTemplate DataType="{x:Type commVM:SingleItemViewModel}">
                     <Grid >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*" MaxWidth="450"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock MinWidth="450" Grid.Column="0">
+                        <TextBlock MinWidth="450" Grid.Column="0" Margin="0,0,75,0">
                              <Run Text="{Binding NewName}"/>
                         </TextBlock>
-                        <TextBlock Panel.ZIndex="0" Opacity="0.5" Grid.Column="1">
+                        <TextBlock Panel.ZIndex="1"  Grid.Column="1" >
                              <Run Text="{Binding PercentDownloaded}"/>
+                             <Run Text="%"/>
                         </TextBlock>
-                        <ProgressBar Grid.Column="1" Height="15" Width="95" Value="{Binding PercentDownloaded}" Margin="-45,2,2,2" Panel.ZIndex="1" Opacity="0.5"/>
+                        <ProgressBar Padding="3" Grid.Column="1" Height="15" Width="95" Value="{Binding PercentDownloaded}" Margin="-41,2,2,2" Panel.ZIndex="0" />
                     </Grid>
                 </DataTemplate>
             </TreeView.Resources>

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DownloadModule.BusinessLogic
+namespace CommonControls.Download
 {
     public class Downloader : IDownloader
     {
@@ -29,6 +29,7 @@ namespace DownloadModule.BusinessLogic
                 
                 //Download to memory //Note: adjust the streams here to download directly to the hard drive 
                 MemoryStream memStream = new MemoryStream();
+                int step = 1;
                 while (true)
                 {
                     //Try to read the data 
@@ -44,12 +45,16 @@ namespace DownloadModule.BusinessLogic
                         memStream.Write(buffer, 0, bytesRead);
 
                         //Update the progress bar 
-                        
+                        double m = step * buffer.Length * 100.0;
+                        double percent = m / (double)dataLength;
+                        progressCallback((int)percent);
                     }
+                    step++;
                 }
 
                 //Convert the downloaded stream to a byte array
                 downloadedDataStream = memStream.ToArray();
+                File.WriteAllBytes(newPath, downloadedDataStream);
 
                 //Clean up 
                 stream.Close();
@@ -57,13 +62,11 @@ namespace DownloadModule.BusinessLogic
             }
             catch (Exception)
             {
-                //May not be connected to the internet 
-                //Or the URL might not exist 
-                MessageBox.Show("There was an error accessing the URL.");
+                MessageBox.Show($"There was an error accessing the URL:{Environment.NewLine}{url}");
             }
             finally
             {
-
+                progressCallback(100);
             }
         }
 

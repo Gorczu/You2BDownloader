@@ -74,6 +74,7 @@
     <Compile Include="Commands\IRemovePlaylist.cs" />
     <Compile Include="Commands\PathSelector.cs" />
     <Compile Include="Commands\RemovePlaylist.cs" />
+    <Compile Include="Converters\IndexConverter.cs" />
     <Compile Include="UserPlaylistModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

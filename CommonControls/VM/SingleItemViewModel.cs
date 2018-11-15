@@ -1,20 +1,35 @@
-﻿using Prism.Mvvm;
+﻿using CommonControls.Download;
+using Microsoft.Practices.Unity;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace CommonControls.VM
 {
     public class SingleItemViewModel : BindableBase
     {
+        public SingleItemViewModel()
+        {
+            _dispatcher = Dispatcher.FromThread(Thread.CurrentThread);
+            Downloader = new Downloader();
+        }
+
         private string _address;
         private string _newName;
         private string _description;
         private int _playListId;
         private byte[] _image;
         private int _percentDownloaded;
+        private Dispatcher _dispatcher;
+
+        
+        public IDownloader Downloader { get; set; }
 
         public string Address
         {
@@ -50,6 +65,19 @@ namespace CommonControls.VM
         {
             get => _percentDownloaded;
             set => SetProperty(ref _percentDownloaded, value);
+        }
+
+        public string Extension
+        {
+            get;
+            set;
+        }
+
+        public Task Download(string folderPath)
+        {
+            string path = Path.Combine(folderPath, NewName + "." + Extension);
+            Action<int> updateProgressCallback = p => _dispatcher.Invoke(() => PercentDownloaded = p);
+            return Task.Factory.StartNew(() => Downloader.Download(path, updateProgressCallback, path));
         }
     }
 }

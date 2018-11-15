@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DownloadModule.BusinessLogic
+namespace CommonControls.Download
 {
-    interface IDownloader
+    public interface IDownloader
     {
         void Download(string path, Action<int> progressCallback, string newPath);
     }

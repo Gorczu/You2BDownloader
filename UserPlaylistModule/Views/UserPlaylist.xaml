@@ -8,14 +8,17 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800"
+             xmlns:converters="clr-namespace:UserPlaylistModule.Converters"
              xmlns:res="clr-namespace:UserPlaylistModule"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <UserControl.Resources>
+        <converters:IndexConverter x:Key="idxCnv"/>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Height" Value="25"/>
         </Style>
+        
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -104,35 +107,43 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
             </GroupBox>
 
             <GroupBox Header="Items in selected playlist" Grid.Column="2" Margin="5">
+                
                 <ListView Margin="3" ItemsSource="{Binding SelectedPlayListItemCollection}" SizeChanged="listViewChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn  Header="Nr" Width="30" DisplayMemberBinding="{Binding Address}" />
+
+                            <GridViewColumn Header="Nr" Width="30" DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                        AncestorType={x:Type ListViewItem}}, 
+                                                        Converter={StaticResource idxCnv}}" >
+                            </GridViewColumn>
+
                             <GridViewColumn x:Name="NameCol" Header="Name" Width="110" DisplayMemberBinding="{Binding NewName}" />
-                            <GridViewColumn x:Name="DescCol" Header="Description" Width="110">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox IsReadOnly="False" Text="{Binding Description}" Width="{Binding ElementName=DescCol, Path=Width }">
-                                            <TextBox.InputBindings>
-                                                <KeyBinding Gesture="Enter" 
+                                <GridViewColumn x:Name="DescCol" Header="Description" Width="110">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="False" Text="{Binding Description}" 
+                                                 Width="{Binding ElementName=DescCol, Path=Width }"
+                                                 BorderBrush="Transparent" BorderThickness="0">
+                                                <TextBox.InputBindings>
+                                                    <KeyBinding Gesture="Enter" 
                                                 Command="{Binding UpdateTextBoxBindingOnEnterCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}" />
-                                            </TextBox.InputBindings>
-                                        </TextBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="X" Width="35">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="RemButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.RemoveItem}"  Width="18" Height="18" Margin="0"
+                                                </TextBox.InputBindings>
+                                            </TextBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="X" Width="35">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="RemButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.RemoveItem}"  Width="18" Height="18" Margin="0"
                                             CommandParameter="{Binding ElementName=RemButton, Path=DataContext}"
                                             Background="Transparent" BorderBrush="Transparent">
-                                            <Image Margin="0" Width="16" Height="16" Source="/UserPlaylistModule;component/Resources/x.png" />
-                                        </Button>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                                                <Image Margin="0" Width="16" Height="16" Source="/UserPlaylistModule;component/Resources/x.png" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

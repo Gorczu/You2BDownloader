@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonControlsModule.cs" />
+    <Compile Include="Download\Downloader.cs" />
+    <Compile Include="Download\IDownloader.cs" />
     <Compile Include="Helpers\ProgressHelper.cs" />
     <Compile Include="Helpers\YouTubeAPIServiceHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
