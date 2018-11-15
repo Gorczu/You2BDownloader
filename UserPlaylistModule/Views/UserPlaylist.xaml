@@ -96,7 +96,7 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
             <Border Grid.Column="1" Margin="5, 25, 15, 15" BorderBrush="Gray" BorderThickness="0.5">
                 <DockPanel  LastChildFill="True" >
                     <Button Content="Choose picture" DockPanel.Dock="Bottom"/>
-                    <Image Source="{Binding CurrenItem.Image}"/>
+                    <Image Source="{Binding CurrenItem.Image, IsAsync=True}"/>
                 </DockPanel>
             </Border>
 

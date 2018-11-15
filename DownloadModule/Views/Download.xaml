@@ -35,17 +35,19 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
                 <DataTemplate DataType="{x:Type commVM:SingleItemViewModel}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>
-                             <Run Text="Title: "/>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock MinWidth="450" Grid.Column="0">
                              <Run Text="{Binding NewName}"/>
                         </TextBlock>
-                        <TextBlock >
-                             <Run Text="Downloaded: "/>
+                        <TextBlock Panel.ZIndex="0" Opacity="0.5" Grid.Column="1">
                              <Run Text="{Binding PercentDownloaded}"/>
                         </TextBlock>
-                        <ProgressBar Height="22" Width="55" Value="25" />
-                    </StackPanel>
+                        <ProgressBar Grid.Column="1" Height="15" Width="95" Value="25" Margin="-45,2,2,2" Panel.ZIndex="1" Opacity="0.5"/>
+                    </Grid>
                 </DataTemplate>
             </TreeView.Resources>
         </TreeView>

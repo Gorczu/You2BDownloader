@@ -10,7 +10,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="{Binding ImgSrc}" />
+        <Image Grid.Row="0" Source="{Binding ImgSrc, IsAsync=True}" />
         <Label Grid.Row="1" >
             <TextBlock Text="{Binding Name}" TextWrapping="WrapWithOverflow" FontSize="9" FontStretch="Medium">
             </TextBlock>
