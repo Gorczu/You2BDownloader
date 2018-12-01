@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,6 +14,7 @@ namespace CommonControls.Download
     {
         public void Download(string url, Action<int> progressCallback, string newPath)
         {
+
             var downloadedDataStream = new byte[0];
             try
             {
@@ -54,15 +56,17 @@ namespace CommonControls.Download
 
                 //Convert the downloaded stream to a byte array
                 downloadedDataStream = memStream.ToArray();
+                Directory.CreateDirectory(Path.GetDirectoryName(newPath));
                 File.WriteAllBytes(newPath, downloadedDataStream);
 
                 //Clean up 
                 stream.Close();
                 memStream.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show($"There was an error accessing the URL:{Environment.NewLine}{url}");
+                Debug.Write($"There was an error accessing the URL:{Environment.NewLine}{url}");
+                Debug.Write(ex.Message);
             }
             finally
             {
