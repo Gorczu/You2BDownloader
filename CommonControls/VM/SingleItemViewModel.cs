@@ -73,11 +73,13 @@ namespace CommonControls.VM
             set;
         }
 
-        public Task Download(string folderPath)
+        public string WholePath { get; set; }
+
+        public Task Download(string folderPath, bool music)
         {
-            string path = Path.Combine(folderPath, NewName + "." + Extension);
+            WholePath = Path.Combine(folderPath, NewName + "." + Extension);
             Action<int> updateProgressCallback = p => _dispatcher.Invoke(() => PercentDownloaded = p);
-            return Task.Factory.StartNew(() => Downloader.Download(path, updateProgressCallback, path));
+            return Task.Factory.StartNew(() => Downloader.Download(WholePath, updateProgressCallback, WholePath));
         }
     }
 }

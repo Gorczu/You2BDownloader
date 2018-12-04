@@ -38,6 +38,30 @@ namespace DownloadModule.ViewModels
             return true;
         }
 
+        private string _musicSource;
+        public string MusicSource
+        {
+            get => _musicSource;
+            set => SetProperty(ref _musicSource, value);
+        }
+
+        public ICommand Play
+        {
+            get
+            {
+                return new DelegateCommand<SingleItemViewModel>(PlayExecute, CanPlay);
+            }
+        }
+
+        private void PlayExecute(SingleItemViewModel obj)
+        {
+            MusicSource = obj.WholePath;
+        }
+        
+        private bool CanPlay(SingleItemViewModel obj)
+        {
+            return true;
+        }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
@@ -70,7 +94,7 @@ namespace DownloadModule.ViewModels
                         Name = playList.Name,
                         Description = playList.Description,
                         FolderPath = playList.FolderPath,
-                        Videos = new List<SingleItemViewModel>(),
+                        Videos = new ObservableCollection<SingleItemViewModel>(),
                     };
                     Playlists.Add(playListVM);
                 }

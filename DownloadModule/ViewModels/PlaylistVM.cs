@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -18,7 +19,7 @@ namespace DownloadModule.ViewModels
         private string _folderPath;
         private string _description;
         private byte[] _image;
-        private IList<SingleItemViewModel> _videos;
+        private ObservableCollection<SingleItemViewModel> _videos;
         private int _percent;
 
         public PlaylistVM()
@@ -55,7 +56,7 @@ namespace DownloadModule.ViewModels
             set => SetProperty(ref _percent, value);
         }
 
-        public IList<SingleItemViewModel> Videos
+        public ObservableCollection<SingleItemViewModel> Videos
         {
             get => _videos;
             set => SetProperty(ref _videos, value);
@@ -72,20 +73,40 @@ namespace DownloadModule.ViewModels
                 return new DelegateCommand(DownloadExec, CanDownlaod);
             }
         }
-
+        
         private bool CanDownlaod()
         {
             return true;
         }
 
+        private int _selectedKindOfMusicIdx = 0;
+        public int SelectedKindOfMusicIdx
+        {
+            get => _selectedKindOfMusicIdx;
+            set => SetProperty(ref _selectedKindOfMusicIdx, value);
+        }
+
+        private bool _isSelectionEnabled = true;
+        public bool IsSelectionEnabled
+        {
+            get => _isSelectionEnabled;
+            set => SetProperty(ref _isSelectionEnabled, value);
+        }
+
+        public bool DownloadMusic
+        {
+            get { return _selectedKindOfMusicIdx == 1; }
+        }
+        
         private void DownloadExec()
         {
-            foreach(var item in Videos)
+            IsSelectionEnabled = false;
+            foreach (var item in Videos)
             {
                 Task task = null;
                 if(!_tasks.TryGetValue(item.Address, out task))
                 {
-                    task =  item.Download(this._folderPath);
+                    task =  item.Download(this._folderPath, DownloadMusic);
                     _tasks.Add(item.Address, task);
                 }
             }

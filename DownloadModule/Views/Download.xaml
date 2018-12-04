@@ -13,10 +13,15 @@
              >
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <TreeView Name="trvFamilies" ItemsSource="{Binding Playlists}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TreeView Name="trvFamilies" Grid.Row="1" ItemsSource="{Binding Playlists}">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type vm:PlaylistVM}" ItemsSource="{Binding Videos}">
                     <StackPanel Orientation="Horizontal">
@@ -28,6 +33,14 @@
                             <Run Text="{Binding Name}"/>
                             <Run Text="     "/>
                         </TextBlock >
+                        <StackPanel Orientation="Horizontal" Margin="2">
+                            <TextBlock Text="Download: " Margin="3"/>
+                            <ComboBox Width="150" SelectedIndex="{Binding SelectedKindOfMusicIdx}"
+                                      IsEnabled="{Binding IsSelectionEnabled}">
+                                <ComboBoxItem Content="Music"/>
+                                <ComboBoxItem Content="Video"/>
+                            </ComboBox>
+                        </StackPanel>
                         <TextBlock  Margin="3">
                             <Run Text="Downloaded: "/>
                             <Run Text="{Binding Percent}"/>
@@ -39,21 +52,26 @@
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" MaxWidth="450"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock MinWidth="450" Grid.Column="0" Margin="0,0,75,0">
                              <Run Text="{Binding NewName}"/>
                         </TextBlock>
-                        <TextBlock Panel.ZIndex="1"  Grid.Column="1" >
+                        <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Width="22" Height="20" Padding="-12" Margin="-120,-2,0,0" Command="{Binding Play}" Foreground="Red" FontSize="20">
+                            ►
+                        </Button>
+                        <TextBlock Panel.ZIndex="1"  Grid.Column="2" >
                              <Run Text="{Binding PercentDownloaded}"/>
                              <Run Text="%"/>
                         </TextBlock>
-                        <ProgressBar Padding="3" Grid.Column="1" Height="15" Width="95" Value="{Binding PercentDownloaded}" Margin="-41,2,2,2" Panel.ZIndex="0" />
+                        <ProgressBar Padding="3" Grid.Column="2" Height="15" Width="95" Value="{Binding PercentDownloaded}" Margin="-41,2,2,2" Panel.ZIndex="0" />
                     </Grid>
                 </DataTemplate>
             </TreeView.Resources>
         </TreeView>
-
+        <MediaElement Grid.Column="1" Grid.RowSpan="2" Source="{Binding MusicSource}"/>
+        
         <!--
         <ListView ItemsSource="{Binding Playlists}"  PreviewMouseWheel="OnWheel">
             <ListView.ItemTemplate>

@@ -15,7 +15,7 @@ namespace Tests
             //IDownloader downloader = new Downloader();
             string url = "https://www.youtube.com/watch?v=3BnfiJnHXvk";
             string path = "tests/test";
-            var res = YouTubeDownloader.GetYouTubeVideoUrls(url);
+            
 
             //Action<int> ac = a => Debug.WriteLine(a);
             //downloader.Download(url, ac, path);
