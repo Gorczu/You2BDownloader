@@ -66,20 +66,18 @@ namespace CommonControls.VM
             get => _percentDownloaded;
             set => SetProperty(ref _percentDownloaded, value);
         }
-
-        public string Extension
+        
+        public string WholePath
         {
             get;
             set;
         }
 
-        public string WholePath { get; set; }
-
-        public Task Download(string folderPath, bool music)
+        public async Task Download(string folderPath, bool music)
         {
-            WholePath = Path.Combine(folderPath, NewName + "." + Extension);
+            WholePath = Path.Combine(folderPath, NewName);
             Action<int> updateProgressCallback = p => _dispatcher.Invoke(() => PercentDownloaded = p);
-            return Task.Factory.StartNew(() => Downloader.Download(WholePath, updateProgressCallback, WholePath));
+            WholePath = await Downloader.Download(Address, updateProgressCallback, WholePath, music);
         }
     }
 }

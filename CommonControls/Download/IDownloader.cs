@@ -8,6 +8,6 @@ namespace CommonControls.Download
 {
     public interface IDownloader
     {
-        void Download(string path, Action<int> progressCallback, string newPath);
+        Task<string> Download(string path, Action<int> progressCallback, string newPath, bool onlyMusic);
     }
 }

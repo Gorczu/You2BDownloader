@@ -98,7 +98,7 @@ namespace DownloadModule.ViewModels
             get { return _selectedKindOfMusicIdx == 1; }
         }
         
-        private void DownloadExec()
+        private async void DownloadExec()
         {
             IsSelectionEnabled = false;
             foreach (var item in Videos)
@@ -106,7 +106,7 @@ namespace DownloadModule.ViewModels
                 Task task = null;
                 if(!_tasks.TryGetValue(item.Address, out task))
                 {
-                    task =  item.Download(this._folderPath, DownloadMusic);
+                    await item.Download(this._folderPath, DownloadMusic);
                     _tasks.Add(item.Address, task);
                 }
             }

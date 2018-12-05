@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DownloadModule.ViewModels
@@ -53,11 +55,14 @@ namespace DownloadModule.ViewModels
             }
         }
 
-        private void PlayExecute(SingleItemViewModel obj)
+        private void PlayExecute(object obj)
         {
-            MusicSource = obj.WholePath;
+            if (obj != null)
+            {
+                MusicSource = ((SingleItemViewModel)((FrameworkElement)obj).DataContext).WholePath;
+            }
         }
-        
+
         private bool CanPlay(SingleItemViewModel obj)
         {
             return true;
@@ -73,7 +78,7 @@ namespace DownloadModule.ViewModels
             LoadData();
         }
 
-       
+
 
         private void LoadData()
         {
@@ -81,7 +86,7 @@ namespace DownloadModule.ViewModels
             foreach (var playList in _playListPersistence.GetItems(1, 20, "Name"))
             {
                 var existing = Playlists.FirstOrDefault(o => o.Name == playList.Name);
-                
+
                 PlaylistVM playListVM = null;
                 if (existing != null)
                 {

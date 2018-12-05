@@ -58,7 +58,9 @@
                         <TextBlock MinWidth="450" Grid.Column="0" Margin="0,0,75,0">
                              <Run Text="{Binding NewName}"/>
                         </TextBlock>
-                        <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Width="22" Height="20" Padding="-12" Margin="-120,-2,0,0" Command="{Binding Play}" Foreground="Red" FontSize="20">
+                        <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Width="22" Height="20" 
+                                Padding="-12" Margin="-120,-2,0,0" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, 
+                                Path=DataContext.Play }" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"  Foreground="Red" FontSize="20">
                             ►
                         </Button>
                         <TextBlock Panel.ZIndex="1"  Grid.Column="2" >

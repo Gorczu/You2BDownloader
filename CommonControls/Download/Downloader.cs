@@ -7,73 +7,52 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using YoutubeExplode;
+using YoutubeExplode.Models.MediaStreams;
 
 namespace CommonControls.Download
 {
     public class Downloader : IDownloader
     {
-        public void Download(string url, Action<int> progressCallback, string newPath)
+        class DownladProgress : IProgress<double>
         {
+            private Action<int> callBack;
 
-            var downloadedDataStream = new byte[0];
-            try
+            public DownladProgress(Action<int> progressCallback)
             {
-                //Get a data stream from the url 
-                WebRequest req = WebRequest.Create(url);
-                WebResponse response = req.GetResponse();
-                Stream stream = response.GetResponseStream();
-
-                //Download in chuncks 
-                byte[] buffer = new byte[1024];
-
-                //Get Total Size 
-                int dataLength = (int)response.ContentLength;
-                
-                //Download to memory //Note: adjust the streams here to download directly to the hard drive 
-                MemoryStream memStream = new MemoryStream();
-                int step = 1;
-                while (true)
-                {
-                    //Try to read the data 
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                    if (bytesRead == 0)
-                    {
-                        //Finished downloading 
-                        break;
-                    }
-                    else
-                    {
-                        //Write the downloaded data
-                        memStream.Write(buffer, 0, bytesRead);
-
-                        //Update the progress bar 
-                        double m = step * buffer.Length * 100.0;
-                        double percent = m / (double)dataLength;
-                        progressCallback((int)percent);
-                    }
-                    step++;
-                }
-
-                //Convert the downloaded stream to a byte array
-                downloadedDataStream = memStream.ToArray();
-                Directory.CreateDirectory(Path.GetDirectoryName(newPath));
-                File.WriteAllBytes(newPath, downloadedDataStream);
-
-                //Clean up 
-                stream.Close();
-                memStream.Close();
+                this.callBack = progressCallback;
             }
-            catch (Exception ex)
+
+            public void Report(double value)
             {
-                Debug.Write($"There was an error accessing the URL:{Environment.NewLine}{url}");
-                Debug.Write(ex.Message);
-            }
-            finally
-            {
-                progressCallback(100);
+                callBack((int)(value * 100.0));
             }
         }
 
-    }
+        IYoutubeClient client = new YoutubeClient();
+        public async Task<string> Download(string url, Action<int> progressCallback, string newPath, bool onlyMusic)
+        {
+            string result = null;
+            var streamInfoSet = await client.GetVideoMediaStreamInfosAsync(url);
+            MediaStreamInfo stream = null;
+            if(onlyMusic)
+            {
+                stream = streamInfoSet.Audio.WithHighestBitrate();
+            }
+            else
+            {
+                stream = streamInfoSet.Muxed.WithHighestVideoQuality();
+            }
 
+            var fileExtension = stream.Container.GetFileExtension();
+            result = newPath + "." + fileExtension;
+            var fileStream = File.Create(result);
+
+            var progress = new DownladProgress(progressCallback);
+
+            await client.DownloadMediaStreamAsync(stream, fileStream, progress);
+
+            return result;
+        }
+    }
 }

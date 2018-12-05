@@ -120,6 +120,10 @@
       <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\YoutubeExplode\YoutubeExplode.csproj">
+      <Project>{b165bc88-5a68-4bc0-bd6a-283a75e437cc}</Project>
+      <Name>YoutubeExplode</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
