@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using YoutubeExplode;
 
 namespace CommonControls.VM
 {
@@ -75,9 +76,13 @@ namespace CommonControls.VM
 
         public async Task Download(string folderPath, bool music)
         {
-            WholePath = Path.Combine(folderPath, NewName);
+            var pathWithoutExtension = Path.Combine(folderPath, NewName);
             Action<int> updateProgressCallback = p => _dispatcher.Invoke(() => PercentDownloaded = p);
-            WholePath = await Downloader.Download(Address, updateProgressCallback, WholePath, music);
+            string newId = null;
+            if(YoutubeClient.TryParseVideoId($"youtube.com/watch?v={Address}", out newId) && YoutubeClient.ValidateVideoId(newId))
+            {
+                WholePath = await Downloader.Download(Address, updateProgressCallback, pathWithoutExtension, music);
+            }
         }
     }
 }

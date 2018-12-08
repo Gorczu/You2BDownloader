@@ -95,7 +95,7 @@ namespace DownloadModule.ViewModels
 
         public bool DownloadMusic
         {
-            get { return _selectedKindOfMusicIdx == 1; }
+            get { return _selectedKindOfMusicIdx == 0; }
         }
         
         private async void DownloadExec()

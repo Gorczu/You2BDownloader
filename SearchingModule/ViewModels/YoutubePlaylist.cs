@@ -71,7 +71,7 @@ namespace SearchingModule.ViewModels
                 {
                     Name = item.snippet.title,
                     ImgSrc = item.snippet.thumbnails?.@default.url,
-                    Id = item.id,
+                    Id = item.contentDetails.videoId,
                 });
             }
 
