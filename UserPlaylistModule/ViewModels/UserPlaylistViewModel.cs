@@ -1,5 +1,4 @@
 ﻿using CommonControls.VM;
-using Microsoft.Practices.Unity;
 using Persistence;
 using Persistence.Respositories;
 using Prism.Commands;

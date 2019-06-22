@@ -2,29 +2,26 @@
 using Prism.Modularity;
 using Prism.Regions;
 using System;
-using Microsoft.Practices.Unity;
 using Prism.Unity;
 using SearchingModule.BusinessLogic;
 using SearchingModule.ViewModels;
+using Prism.Ioc;
 
 namespace SearchingModule
 {
     public class SearchingModule : IModule
     {
-        private IRegionManager _regionManager;
-        private IUnityContainer _container;
-
-        public SearchingModule(IUnityContainer container, IRegionManager regionManager)
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _container = container;
-            _regionManager = regionManager;
+
+            
         }
 
-        public void Initialize()
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            _container.RegisterType<IPlaylistCollector, PlaylistCollector>();
-            
-            _container.RegisterTypeForNavigation<Searching>();
+            containerRegistry.Register<IPlaylistCollector, PlaylistCollector>();
+
+            containerRegistry.RegisterForNavigation<Searching>();
         }
     }
 }

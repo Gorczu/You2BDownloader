@@ -1,5 +1,4 @@
 ﻿using CommonControls.Download;
-using Microsoft.Practices.Unity;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;

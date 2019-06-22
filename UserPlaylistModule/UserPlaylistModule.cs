@@ -2,31 +2,27 @@
 using Prism.Modularity;
 using Prism.Regions;
 using System;
-using Microsoft.Practices.Unity;
 using Prism.Unity;
 using UserPlaylistModule.ViewModels;
 using UserPlaylistModule.Commands;
+using Prism.Ioc;
 
 namespace UserPlaylistModule
 {
     public class UserPlaylistModule : IModule
     {
-        private IRegionManager _regionManager;
-        private IUnityContainer _container;
-
-        public UserPlaylistModule(IUnityContainer container, IRegionManager regionManager)
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _container = container;
-            _regionManager = regionManager;
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            regionManager.RequestNavigate("ContentRegion", "PersonList");
         }
 
-        public void Initialize()
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            _container.RegisterTypeForNavigation<UserPlaylist>();
-            _container.RegisterType<IPathSelector, PathSelector>();
-            //_container.RegisterType<IUserPlaylistViewModel, UserPlaylistViewModel>();
-            //_container.RegisterType<IAddItemCommand, AddPlaylistCommand>();
-            _regionManager.RequestNavigate("ContentRegion", "UserPlaylist");
+            containerRegistry.RegisterForNavigation<UserPlaylist>();
+            containerRegistry.Register<IPathSelector, PathSelector>();
+
+            
         }
     }
 }

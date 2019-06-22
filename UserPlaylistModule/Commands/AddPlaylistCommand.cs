@@ -1,5 +1,4 @@
 ﻿using CommonControls.VM;
-using Microsoft.Practices.Unity;
 using Persistence;
 using Persistence.Models;
 using Persistence.Respositories;

@@ -1,25 +1,23 @@
 ﻿using Prism.Modularity;
 using Prism.Regions;
 using System;
-using Microsoft.Practices.Unity;
 using Prism.Unity;
+using Prism.Ioc;
 
 namespace Persistence
 {
     public class PersistenceModule : IModule
     {
-        private IRegionManager _regionManager;
-        private IUnityContainer _container;
+       
 
-        public PersistenceModule(IUnityContainer container, IRegionManager regionManager)
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _container = container;
-            _regionManager = regionManager;
+           
         }
 
-        public void Initialize()
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            
         }
     }
 }
