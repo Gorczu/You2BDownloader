@@ -32,14 +32,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -90,8 +106,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Blend.Interctivity.WPF.v4.0">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="MicrosoftExpressionInteractions">
+      <Version>3.0.40218</Version>
+    </PackageReference>
+    <PackageReference Include="CommonServiceLocator">
+      <Version>2.0.4</Version>
+    </PackageReference>
     <PackageReference Include="log4net">
       <Version>2.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>7.1.0.431</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431" />
     <PackageReference Include="Prism.Validation">
@@ -119,12 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
-      <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
+      <Project>{AAB5D1FB-14EA-4EB7-A729-E6C5589C45FF}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YoutubeExplode\YoutubeExplode.csproj">
-      <Project>{b165bc88-5a68-4bc0-bd6a-283a75e437cc}</Project>
-      <Name>YoutubeExplode</Name>
+    <ProjectReference Include="..\YouToubeEngine\YouToubeEngine.csproj">
+      <Project>{35f513aa-ae68-4d84-b2fb-1400bf71b28c}</Project>
+      <Name>YouToubeEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

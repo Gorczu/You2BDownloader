@@ -5,10 +5,11 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using log4net;
 using log4net.Config;
+using Persistence;
+using Persistence.Respositories;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Unity;
@@ -22,17 +23,14 @@ namespace YouToubeDownloader
     public partial class App : PrismApplication
     {
         // Logger instance named "MyApp".
-        private static readonly ILog LOG = LogManager.GetLogger(typeof(App));
-
+        
         private static readonly string LOG_4NET_CONFIG =
             Path.Combine(
             Directory.GetCurrentDirectory(),
             "Config", "Log4Net.xml");
 
-        public App()
-        {
-        }
-
+        private static readonly ILog LOG = LogManager.GetLogger(typeof(App));
+        
         protected override Window CreateShell()
         {
             return Container.Resolve<MainWindow>();
@@ -40,17 +38,20 @@ namespace YouToubeDownloader
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            
-            moduleCatalog.AddModule(typeof(SearchingModule.SearchingModule));
-            moduleCatalog.AddModule(typeof(UserPlaylistModule.UserPlaylistModule));
-            moduleCatalog.AddModule(typeof(DownloadModule.DownloadModule));
-            moduleCatalog.AddModule(typeof(CommonControls.CommonControlsModule));
+            var plr = new PlaylistRepository(SqlConnector.GetDefaultConnection());
+            var items = plr.GetItems(1, 10, "Name");
+
+            moduleCatalog.AddModule<SearchingModule.SearchingModule>()
+                         .AddModule<CommonControls.CommonControlsModule>()
+                         .AddModule<UserPlaylistModule.UserPlaylistModule>()
+                         .AddModule<DownloadModule.DownloadModule>();
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
 
         }
 
+        
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

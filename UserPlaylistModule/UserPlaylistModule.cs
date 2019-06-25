@@ -14,13 +14,17 @@ namespace UserPlaylistModule
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RequestNavigate("ContentRegion", "PersonList");
+            regionManager.RequestNavigate("ContentRegion", "UserPlaylist");
+            
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            var instance = new PathSelector();
+            containerRegistry.RegisterInstance(typeof(IPathSelector), instance);
+            
+            
             containerRegistry.RegisterForNavigation<UserPlaylist>();
-            containerRegistry.Register<IPathSelector, PathSelector>();
 
             
         }

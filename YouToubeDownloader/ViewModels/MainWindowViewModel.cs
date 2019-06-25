@@ -33,7 +33,8 @@ namespace YouToubeDownloader.ViewModels
         {
             get
             {
-                return new DelegateCommand<string>(a => _regions.RequestNavigate("ContentRegion", a));
+                return new DelegateCommand<string>(a => 
+                _regions.RequestNavigate("ContentRegion", a));
             }
         }
 

@@ -16,7 +16,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\krzys\source\repos\YouToubeDownloader\PUBLISH\</PublishUrl>
+    <PublishUrl>C:\Users\Krzysztof\Desktop\YouToubeDownloader\PUBLISH\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -88,12 +88,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -172,8 +170,20 @@
     <None Include="YouToubeDownloader_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Blend.Interctivity.WPF.v4.0">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="MicrosoftExpressionInteractions">
+      <Version>3.0.40218</Version>
+    </PackageReference>
+    <PackageReference Include="CommonServiceLocator">
+      <Version>2.0.4</Version>
+    </PackageReference>
     <PackageReference Include="log4net">
       <Version>2.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>7.1.0.431</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431" />
     <PackageReference Include="Prism.Wpf">
@@ -182,21 +192,18 @@
     <PackageReference Include="StrongNamer">
       <Version>0.0.8</Version>
     </PackageReference>
-    <PackageReference Include="System.Data.SQLite.Core">
-      <Version>1.0.108</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonControls\CommonControls.csproj">
-      <Project>{dd9b7510-18f8-4e87-8392-e03d69abd3cf}</Project>
+      <Project>{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}</Project>
       <Name>CommonControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\DownloadModule\DownloadModule.csproj">
-      <Project>{e35e8c88-2094-40b7-b7ea-10277d400a13}</Project>
+      <Project>{E35E8C88-2094-40B7-B7EA-10277D400A13}</Project>
       <Name>DownloadModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
-      <Project>{aab5d1fb-14ea-4eb7-a729-e6c5589c45ff}</Project>
+      <Project>{AAB5D1FB-14EA-4EB7-A729-E6C5589C45FF}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\SearchingModule\SearchingModule.csproj">
@@ -207,9 +214,9 @@
       <Project>{9E09B463-54FC-4928-AC45-7B5774C9F719}</Project>
       <Name>UserPlaylistModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YoutubeExplode\YoutubeExplode.csproj">
-      <Project>{b165bc88-5a68-4bc0-bd6a-283a75e437cc}</Project>
-      <Name>YoutubeExplode</Name>
+    <ProjectReference Include="..\YouToubeEngine\YouToubeEngine.csproj">
+      <Project>{35f513aa-ae68-4d84-b2fb-1400bf71b28c}</Project>
+      <Name>YouToubeEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +234,7 @@
     <Resource Include="iconfinder_youtube_313083.ico" />
   </ItemGroup>
   <ItemGroup>
+    <!-- 
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -237,6 +245,7 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    -->
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\youtube_I_1313507.png" />

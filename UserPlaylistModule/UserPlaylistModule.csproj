@@ -60,7 +60,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -129,11 +128,17 @@
     <PackageReference Include="Blend.Interctivity.WPF.v4.0">
       <Version>1.0.3</Version>
     </PackageReference>
+    <PackageReference Include="CommonServiceLocator">
+      <Version>2.0.4</Version>
+    </PackageReference>
     <PackageReference Include="log4net">
       <Version>2.0.8</Version>
     </PackageReference>
     <PackageReference Include="MicrosoftExpressionInteractions">
       <Version>3.0.40218</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>7.1.0.431</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431" />
     <PackageReference Include="Prism.Wpf">

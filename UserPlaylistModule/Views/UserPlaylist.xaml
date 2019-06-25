@@ -111,12 +111,14 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
                 <ListView Margin="3" ItemsSource="{Binding SelectedPlayListItemCollection}" SizeChanged="listViewChanged">
                     <ListView.View>
                         <GridView>
-
+<!--
                             <GridViewColumn Header="Nr" Width="30" DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, 
                                                         AncestorType={x:Type ListViewItem}}, 
-                                                        Converter={StaticResource idxCnv}}" >
+    
+                            Converter={StaticResource idxCnv}}" >
+                            
                             </GridViewColumn>
-
+-->
                             <GridViewColumn x:Name="NameCol" Header="Name" Width="110" DisplayMemberBinding="{Binding NewName}" />
                                 <GridViewColumn x:Name="DescCol" Header="Description" Width="110">
                                     <GridViewColumn.CellTemplate>

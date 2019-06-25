@@ -26,9 +26,9 @@ namespace UserPlaylistModule.ViewModels
         private PlaylistItemRepository _playListItemPersistence;
         private IRemovePlaylist _removePlaylist;
 
-        public UserPlaylistViewModel(IPathSelector pathSelector)
+        public UserPlaylistViewModel()
         {
-            this.PathSelector = pathSelector;
+            this.PathSelector = new PathSelector();
             this.PathSelector.SetPath(path => this._currenItem.Path = path);
             _playListPersistence = new PlaylistRepository(SqlConnector.GetDefaultConnection());
             _playListItemPersistence = new PlaylistItemRepository(SqlConnector.GetDefaultConnection());
