@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>YouToubeDownloader</RootNamespace>
     <AssemblyName>YouToubeDownloader</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -31,6 +31,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -163,6 +164,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -172,6 +174,9 @@
   <ItemGroup>
     <PackageReference Include="Blend.Interctivity.WPF.v4.0">
       <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Expression.Blend.Sdk.WPF">
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="MicrosoftExpressionInteractions">
       <Version>3.0.40218</Version>
@@ -192,10 +197,19 @@
     <PackageReference Include="StrongNamer">
       <Version>0.0.8</Version>
     </PackageReference>
+    <PackageReference Include="System.Data.SQLite">
+      <Version>1.0.111</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Core">
+      <Version>1.0.111</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonControls\CommonControls.csproj">
-      <Project>{DD9B7510-18F8-4E87-8392-E03D69ABD3CF}</Project>
+      <Project>{dd9b7510-18f8-4e87-8392-e03d69abd3cf}</Project>
       <Name>CommonControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\DownloadModule\DownloadModule.csproj">
@@ -231,7 +245,9 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="iconfinder_youtube_313083.ico" />
+    <Resource Include="iconfinder_youtube_313083.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <!-- 
@@ -246,12 +262,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
     -->
+    <Resource Include="if_youtube_294703.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\youtube_I_1313507.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="if_youtube_294703.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -4,13 +4,13 @@
              xmlns:local="clr-namespace:UserPlaylistModule.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:common="clr-namespace:CommonControls.Views;assembly=CommonControls"
+             
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800"
              xmlns:converters="clr-namespace:UserPlaylistModule.Converters"
-             xmlns:res="clr-namespace:UserPlaylistModule"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:common="clr-namespace:CommonControls.Views;assembly=CommonControls"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <UserControl.Resources>
         <converters:IndexConverter x:Key="idxCnv"/>
@@ -115,10 +115,10 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
                             <GridViewColumn Header="Nr" Width="30" DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, 
                                                         AncestorType={x:Type ListViewItem}}, 
     
-                            Converter={StaticResource idxCnv}}" >
-                            
+                            Converter={ x:Static converters:IndexConverter } }" >
                             </GridViewColumn>
 -->
+
                             <GridViewColumn x:Name="NameCol" Header="Name" Width="110" DisplayMemberBinding="{Binding NewName}" />
                                 <GridViewColumn x:Name="DescCol" Header="Description" Width="110">
                                     <GridViewColumn.CellTemplate>
@@ -161,7 +161,7 @@ AncestorType={x:Type UserControl}}, Path=DataContext.PathSelector}"  Margin="5" 
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <common:UserListView/>
+                    <!-- <common:UserListView/> -->
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemsPanel>
